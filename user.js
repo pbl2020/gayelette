@@ -3,14 +3,16 @@ const router = express.Router();
 
 router.use(express.json());
 
-var userData = [];
+var userData = {};
 
 router.get("/", (req, res) =>{
 	res.send(userData);
 })
 
 router.post("/", (req, res) =>{
-	userData.push(req.body);
+	const date = new Date();
+
+	userData[date.now()] = req.body;
 	res.status(200).send("OK!");
 })
 

@@ -1,12 +1,24 @@
 const express = require('express');
-const app = express();
 const path = require('path');
+const fs = require('fs');
+const https = require('https');
+const app = express();
 
 const userRouter = require("./user.js");
 
-app.listen(8080, () => {
-  console.log('Running at Port 8080...');
-});
+const csr = fs.readFileSync("./server.csr");
+const key = fs.readFileSync("./server.key");
+
+const options = {
+  key:  key,
+  cert: csr
+};
+
+const server = https.createServer(options, app);
+
+const port = 8080;
+
+server.listen(port);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/user", userRouter);
