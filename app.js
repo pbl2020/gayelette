@@ -6,20 +6,16 @@ const app = express();
 
 const userRouter = require("./user.js");
 
-const csr = fs.readFileSync("./server.csr");
-const key = fs.readFileSync("./server.key");
-
-const options = {
-  key:  key,
-  cert: csr
-};
-
-const server = https.createServer(options, app);
-
 const port = 8080;
 
-server.listen(port);
-
+app.listen(port, () => {
+  console.log('Running at Port ' + port + '...');
+});
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/user", userRouter);
 

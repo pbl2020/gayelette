@@ -10,9 +10,9 @@ router.get("/", (req, res) =>{
 })
 
 router.post("/", (req, res) =>{
-	const date = new Date();
+	const date = Date.now();
 
-	userData[date.now()] = req.body;
+	userData[date] = req.body;
 	res.status(200).send("OK!");
 })
 
