@@ -1,21 +1,32 @@
 /**
  * /app.js
- */ 
+ */
 // express モジュールのインスタンス作成
-const express = require('express');
-const app = express();
-// パス指定用モジュール
-const path = require('path');
 
-// 8080番ポートで待ちうける
-app.listen(8080, () => {
-  console.log('Running at Port 8080...');
+"use strict";
+var express = require("express");
+var app = express();
+app.use(express.static("wwwroot"));
+app.get("/",function(req,res){
+  res.sendFile("D:/github/gayelette-server/wwwroot/test.html");
 });
 
-// 静的ファイルのルーティング
-app.use(express.static(path.join(__dirname, 'public')));
+let port1 = 3000;
+let port2 = 3001;
 
-// その他のリクエストに対する404エラー
-app.use((req, res) => {
-  res.sendStatus(404);
+//httpサーバ
+var http = require("http").Server(app);
+http.listen(port1,function(){
+  console.log("\tサーバがポート%dで起動しました。モード:%s",port1,app.settings.env)
+});
+
+//httpsサーバ
+var fs = require("fs");
+var opt = {
+  key:  fs.readFileSync("D:/github/gayelette-server/ssl/server.key"),
+  cert: fs.readFileSync("D:/github/gayelette-server/ssl/server.crt"),
+};
+var https = require("https").Server(opt,app);
+https.listen(port2,function(){
+  console.log("\tサーバがポート%dで起動しました。モード:%s",port2,app.settings.env)
 });
