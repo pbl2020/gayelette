@@ -1,32 +1,44 @@
-/**
- * /app.js
- */
-// express モジュールのインスタンス作成
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const http = require("http")
+const https = require('https');
+const app = express();
 
-"use strict";
-var express = require("express");
-var app = express();
+const userRouter = require("./user.js");
+
+const port1 = 3000;
+const port2 = 3001;
+
+// const PATH = "D:/github/gayelette-server";
+const PATH = "C:/Users/S.Kite/Documents/Github/gayelette";
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static("wwwroot"));
 app.get("/",function(req,res){
-  res.sendFile("D:/github/gayelette-server/wwwroot/test.html");
+  res.sendFile(PATH + "/wwwroot/test.html");
+});
+app.use("/user", userRouter);
+
+app.use((req, res) => {
+  res.sendStatus(404);
 });
 
-let port1 = 3000;
-let port2 = 3001;
-
-//httpサーバ
-var http = require("http").Server(app);
-http.listen(port1,function(){
+const httpServer = http.Server(app);
+httpServer.listen(port1,function(){
   console.log("\tサーバがポート%dで起動しました。モード:%s",port1,app.settings.env)
 });
 
-//httpsサーバ
-var fs = require("fs");
-var opt = {
-  key:  fs.readFileSync("D:/github/gayelette-server/ssl/server.key"),
-  cert: fs.readFileSync("D:/github/gayelette-server/ssl/server.crt"),
+const opt = {
+  key:  fs.readFileSync(PATH + "/ssl/server.key"),
+  cert: fs.readFileSync(PATH + "/ssl/server.crt"),
 };
-var https = require("https").Server(opt,app);
-https.listen(port2,function(){
+const httpsServer = https.Server(opt, app);
+httpsServer.listen(port2,function(){
   console.log("\tサーバがポート%dで起動しました。モード:%s",port2,app.settings.env)
 });
