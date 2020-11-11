@@ -111,7 +111,7 @@ class MenuList{
 				y: 100,
 				width: 200,
 				height: 50,
-				icon: "https://cdn.discordapp.com/avatars/384897317389729792/cd84001b41e614baf9b11e01680b8917.png?size=128",
+				icon: "",
 				name: "Kaito"
 			}),
 			new MenuItem({
@@ -119,7 +119,7 @@ class MenuList{
 				y: 100,
 				width: 200,
 				height: 50,
-				icon: "https://cdn.discordapp.com/avatars/279493175125737472/d999dc661fad845b0bb3c35097196e93.png?size=128",
+				icon: "",
 				name: "Shimizu"
 			})
 		];
