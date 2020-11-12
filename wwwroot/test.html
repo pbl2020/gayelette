@@ -1,13 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>gomi-server</title>
-  </head>
-  <body>
-    <h1>これが本物</h1>
-    <div class="">
-      <p>俺の勝ち</p>
+<html>
+<head lang="ja">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>SkyWay Handson</title>
+    <link rel="stylesheet" href="./style.css">
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+<div class="videosContainer">
+    <video id="myStream" autoplay></video>
+</div>
+
+<div class="myControllerContainer">
+    <p>Your id: <span id="my-id">...</span></p>
+
+    <div class="select">
+        <label for="audioSource">Audio input source: </label><select id="audioSource"></select>
     </div>
-  </body>
+    <div class="select">
+        <label for="videoSource">Video source: </label><select id="videoSource"></select>
+    </div>
+
+    <form id="make-call">
+        <input type="text" placeholder="Join room..." id="join-room">
+        <button type="submit">Join</button>
+    </form>
+    <div id="end-call">
+        <p>Currently in room <span id="room-id">...</span></p>
+        <button>Leave</button>
+    </div>
+
+</div>
+
+</body>
 </html>
