@@ -1,28 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<title>Rooms - Gayelette</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<title>Rooms - Gayelette</title>
+	<script src="rooms.js"></script>
 	<link rel="stylesheet" href="welcome.css" />
 </head>
-<body>
+<body onload="reloadRooms()">
 	<div class="wrapper">
 		<div class="title">Gayelette Rooms</div>
-		<div class="room-list">
-			<div class="room-container">
-				<div class="room-name">
-					PBL2020 - Team6
-				</div>
-				<div class="room-members">		
-				</div>
-				<div class="button-container">
-					<button class="button" onclick="onResister()">
-						JOIN!!
-					</button>
-				</div>
-			</div>
+		<div id="room-list" class="room-list">
 			<button class="button-create-room">
 				+
 			</button>
