@@ -32,12 +32,39 @@ class Screen{
 			size: 30,
 			angle: 45
 		}
+
+
+
 	]
 
 	constructor(){
 		this.menu = new MenuList(windowWidth - 300, 0);
-		this.stage = new Stage(this.user,this.otheruser);
+		this.stage = new Stage(this.user);
 		this.stage.setClick(this.handleClick.bind(this));
+		console.log(this.otheruser);
+		this.setData(this.otheruser);
+		setTimeout(()=>{
+			this.setData( [
+				{
+					name: "shimizu",
+					id: "0312018087",
+					x: 400, 
+					y: 400,
+					size: 30,
+					angle: 90
+				},
+				{
+					name: "koyama",
+					id: "0312018062",
+					x: 100, 
+					y: 100,
+					size: 30,
+					angle: 90
+				}
+			])
+		},5000);
+
+
 	}
 	handleClick(){
 		console.log(mouseX,mouseY);
@@ -50,7 +77,14 @@ class Screen{
 
 		this.user = {...this.user, x: mouseX, y: mouseY ,angle: moveAngle}
 	}
+	setData(otheruser){
+		this.otheruser = otheruser;
+		this.stage.setAvatars(otheruser);
+		console.log(this.otheruser);
+
+	}
 	draw(){
+
 		clear();
 		this.menu.draw();
 		this.stage.draw();
