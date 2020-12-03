@@ -32,9 +32,6 @@ class Screen{
 			size: 30,
 			angle: 45
 		}
-
-
-
 	]
 
 	constructor(){
@@ -43,36 +40,12 @@ class Screen{
 		this.stage.setClick(this.handleClick.bind(this));
 		console.log(this.otheruser);
 		this.setData(this.otheruser);
-		setTimeout(()=>{
-			this.setData( [
-				{
-					name: "shimizu",
-					id: "0312018087",
-					x: 400, 
-					y: 400,
-					size: 30,
-					angle: 90
-				},
-				{
-					name: "koyama",
-					id: "0312018062",
-					x: 100, 
-					y: 100,
-					size: 30,
-					angle: 90
-				}
-			])
-		},5000);
-
-
 	}
 	handleClick(){
-		console.log(mouseX,mouseY);
 		let moveX = mouseX - this.user.x;
 		let moveY = mouseY - this.user.y;
 		let hypo = Math.sqrt(Math.pow(moveX,2) + Math.pow(moveY,2));
 		let moveAngle = (Math.atan2(moveY,moveX) * (180 / Math.PI) + 90 + 360) % 360;
-		console.log(moveX,moveY,hypo,Math.atan2(moveY,-moveX),moveAngle);
 		this.stage.setMyAvatar(mouseX,mouseY,moveAngle);
 
 		this.user = {...this.user, x: mouseX, y: mouseY ,angle: moveAngle}
