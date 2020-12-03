@@ -2,31 +2,6 @@ function easeInOutQuad(x) {
 	return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
 }
 
-class Touchable{
-
-	onClick = null;
-
-	_prevMouseIsPressed = false;
-
-	_shouldEventExecute(){
-		if(!this._prevMouseIsPressed && mouseIsPressed && this.isClicked(mouseX, mouseY))
-			this.onClick && this.onClick();
-		this._prevMouseIsPressed = mouseIsPressed;
-	}
-
-	isClicked(x, y){
-		return false;
-	};
-
-	setClickHandler(event){
-		this.onClick = event;
-	}
-
-	draw(){
-		this._shouldEventExecute();
-	}
-}
-
 class MenuItem extends Touchable{
 	x = 100;
 	y = 100;
