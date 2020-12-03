@@ -81,7 +81,6 @@ class Stage extends Touchable{
 	isClicked(mouseX, mouseY){
 		const fragX = mouseX < windowWidth - 300;
 		const fragY = mouseY < windowHeight;
-		console.log(fragX, fragY)
 		return fragX && fragY;
 	}
 	setClick(onClick){
