@@ -6,6 +6,7 @@ class Screen {
     moveY = 0;
     hypo = 0;
     moveAngle = 0;
+
     user = {
         name: "koyama",
         id: "0312018086",
@@ -56,9 +57,23 @@ class Screen {
 
     }
     draw() {
+
+    var primaryColor = "#2d4262";
+    var primaryVariant = "#73605b";
+    var secondaryColor ="#2d4262";
+    var secondaryVariant ="#d09683";
+    var fontColor =" #FFFFFF";
+        push();
         clear();
+        background(primaryColor);
+        pop();
+        push();
+        fill(primaryVariant);
         this.menu.draw();
+        pop();
+
         this.stage.draw();
+
     }
 }
 
@@ -66,6 +81,7 @@ var screen;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+
     screen = new Screen();
 }
 
