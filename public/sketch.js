@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 class Screen{
 	menu = null;
 	avatar = null;
@@ -23,6 +24,33 @@ class Screen{
 			size: 30,
 			angle: 90
 		},
+=======
+class Screen {
+    menu = null;
+    avatar = null;
+    stage = null;
+    moveX = 0;
+    moveY = 0;
+    hypo = 0;
+    moveAngle = 0;
+
+    user = {
+        name: "koyama",
+        id: "0312018086",
+        x: 100,
+        y: 200,
+        size: 30,
+        angle: 0
+    };
+    otheruser = [{
+            name: "shimizu",
+            id: "0312018087",
+            x: 150,
+            y: 250,
+            size: 30,
+            angle: 90
+        },
+>>>>>>> Stashed changes
 
 		{
 			name: "masuda",
@@ -58,6 +86,7 @@ class Screen{
 	}
 	draw(){
 
+<<<<<<< Updated upstream
 		clear();
 		this.menu.draw();
 		this.stage.draw();
@@ -72,4 +101,39 @@ function setup(){
 
 function draw(){
 	screen.draw();
+=======
+    var primaryColor = "#2d4262";
+    var primaryVariant = "#73605b";
+    var secondaryColor ="#2d4262";
+    var secondaryVariant ="#d09683";
+    var fontColor =" #FFFFFF";
+        push();
+        clear();
+        background(primaryColor);
+        pop();
+        push();
+        fill(primaryVariant);
+        this.menu.draw();
+        pop();
+
+        this.stage.draw();
+
+    }
+}
+
+var screen;
+
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+
+    screen = new Screen();
+
+}
+
+function draw() {
+
+    //fill("#363237");
+    screen.draw();
+    
+>>>>>>> Stashed changes
 }

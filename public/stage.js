@@ -91,7 +91,7 @@ class Stage extends Touchable{
 	}
 
 	setAvatars(avatars){
-		//this.avatars =[];
+		
 		this.avatars=CheckObjectDiff(avatars,this.oldAvatars,this.avatars);
 		console.log(this.avatars);
 		this.oldAvatars = avatars;
