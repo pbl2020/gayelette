@@ -57,13 +57,10 @@ class Screen {
 
     }
     draw() {
-
-    var primaryColor = "#2d4262";
-    var primaryVariant = "#73605b";
-    var secondaryColor ="#2d4262";
-    var secondaryVariant ="#d09683";
-    var fontColor =" #FFFFFF";
-        push();
+        var primaryColor ='#505160';
+        var primaryVariant ='#68828e';
+        var secondaryColor ='#aebd38';
+        var secondaryVariant ='#598234';
         clear();
         background(primaryColor);
         pop();

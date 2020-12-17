@@ -125,13 +125,17 @@ class MenuItem extends Touchable {
     }
 
     draw() {
-        var fontColor = " #FFFFFF";
+        var primaryColor = '#505160';
+        var primaryVariant = '#68828e';
+        var secondaryColor = '#aebd38';
+        var secondaryVariant = '#598234';
+        var fontColor = '#ffffff';
+        //fill(primaryVariant);
         super.draw();
 
         const padding = 5;
         const r2 = this.height - padding * 2;
         const fontSize = 10;
-
         ellipse(this.x + r2 / 2 + padding, this.y + r2 / 2 + padding, r2, r2);
         push();
         fill(fontColor);
@@ -148,7 +152,7 @@ class MenuList {
     x = 100;
     y = 100;
     width = 300;
-    height = 300;
+    height = windowHeight;
 
     isOpen = false;
     frameRate = 50;
@@ -182,6 +186,11 @@ class MenuList {
     }
 
     draw() {
+        var primaryColor = '#505160';
+        var primaryVariant = '#68828e';
+        var secondaryColor = '#aebd38';
+        var secondaryVariant = '#598234';
+        background(primaryColor);
         const paddingItems = 15;
         const iconSize = 50;
 
@@ -193,8 +202,8 @@ class MenuList {
             this.mx = (this.x + this.width - iconSize) - (this.width - iconSize) * easeInOutQuad(this.f / this.frameRate);
             this.f += 1;
         }
-        //push();
-        //fill("#363237");
+        push();
+        fill(primaryVariant);
         rect(this.mx, this.my, this.width, this.height);
         this.items.forEach((item, i) => {
             item.setPosition(this.mx, this.my + (item.height + paddingItems) * i);
@@ -203,9 +212,10 @@ class MenuList {
                 else this.open()
                 this.handleClickItem(item)
             })
+            
             item.draw();
         })
-        //pop();
+        pop();
     }
     setMenuData(items) {
         this.items = checkMenuItemDiff(items, this.oldItems, this.items);
