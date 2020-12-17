@@ -6,7 +6,6 @@ class Screen {
     moveY = 0;
     hypo = 0;
     moveAngle = 0;
-
     user = {
         name: "koyama",
         id: "0312018086",
@@ -40,6 +39,33 @@ class Screen {
         this.stage.setClick(this.handleClick.bind(this));
         console.log(this.otheruser);
         this.setData(this.otheruser);
+        setTimeout(() => {
+            this.setData([{
+                    name: "shimi",
+                    id: "0312018087",
+                    x: 400,
+                    y: 400,
+                    size: 30,
+                    angle: 90
+                },
+                {
+                    name: "koyama",
+                    id: "0312018062",
+                    x: 100,
+                    y: 100,
+                    size: 30,
+                    angle: 90
+                },
+                {
+                    name: "oota",
+                    id: "0312018063",
+                    x: 300,
+                    y: 100,
+                    size: 30,
+                    angle: 90
+                }
+            ])
+        }, 5000);
     }
     handleClick() {
         let moveX = mouseX - this.user.x;
@@ -53,24 +79,15 @@ class Screen {
     setData(otheruser) {
         this.otheruser = otheruser;
         this.stage.setAvatars(otheruser);
+        this.menu.setMenuData(otheruser);
         console.log(this.otheruser);
 
     }
     draw() {
-        var primaryColor ='#505160';
-        var primaryVariant ='#68828e';
-        var secondaryColor ='#aebd38';
-        var secondaryVariant ='#598234';
+
         clear();
-        background(primaryColor);
-        pop();
-        push();
-        fill(primaryVariant);
         this.menu.draw();
-        pop();
-
         this.stage.draw();
-
     }
 }
 
@@ -78,42 +95,10 @@ var screen;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-
-    screen = new Screen();
-}
-
-function draw() {
-    screen.draw();
-    var primaryColor = "#2d4262";
-    var primaryVariant = "#73605b";
-    var secondaryColor = "#2d4262";
-    var secondaryVariant = "#d09683";
-    var fontColor = " #FFFFFF";
-    push();
-    clear();
-    background(primaryColor);
-    pop();
-    push();
-    fill(primaryVariant);
-    this.menu.draw();
-    pop();
-
-    this.stage.draw();
-
-}
-
-var screen;
-
-function setup() {
-    createCanvas(windowWidth, windowHeight);
-
     screen = new Screen();
 
 }
 
 function draw() {
-
-    //fill("#363237");
     screen.draw();
-
 }

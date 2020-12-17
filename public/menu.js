@@ -125,13 +125,13 @@ class MenuItem extends Touchable {
     }
 
     draw() {
+        super.draw();
         var primaryColor = '#505160';
         var primaryVariant = '#68828e';
         var secondaryColor = '#aebd38';
         var secondaryVariant = '#598234';
         var fontColor = '#ffffff';
         //fill(primaryVariant);
-        super.draw();
 
         const padding = 5;
         const r2 = this.height - padding * 2;
