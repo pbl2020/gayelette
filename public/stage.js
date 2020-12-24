@@ -72,10 +72,10 @@ class Stage extends Touchable{
 	draw(){
 		super.draw()
 		this.myAvatar.draw();
-    	for (let i =0; i < this.avatars.length;i++){
-    		if(this.avatars[i])
-	    		this.avatars[i].draw();
-    	}
+  	for (let i =0; i < this.avatars.length;i++){
+    	if(this.avatars[i])
+	   		this.avatars[i].draw();
+    }
 	}
 
 	isHover(mouseX, mouseY){

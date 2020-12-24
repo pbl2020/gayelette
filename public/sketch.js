@@ -2,6 +2,7 @@ class Screen{
 	menu = null;
 	avatar = null;
 	stage = null;
+	contextMenu = null;
 	moveX = 0;
 	moveY = 0;
 	hypo = 0;
@@ -32,14 +33,21 @@ class Screen{
 			size: 30,
 			angle: 45
 		}
-
-
-
 	]
 
 	constructor(){
 		this.menu = new MenuList(windowWidth - 300, 0);
 		this.stage = new Stage(this.user);
+		this.contextMenu = new ContextMenu([{
+			text: "新規作成",
+			onClick: () => {console.log("新規作成")}
+		}, {
+			text: "  会議室",
+			onClick: () => {console.log("会議室")}
+		}, {
+			text: "  プレゼンテーション",
+			onClick: () => {console.log("プレゼンテーション")}
+		}]);
 		this.stage.setClick(this.handleClick.bind(this));
 		console.log(this.otheruser);
 		this.setData(this.otheruser);
@@ -68,14 +76,19 @@ class Screen{
 	}
 	handleClick(){
 		console.log(mouseX,mouseY);
-		let moveX = mouseX - this.user.x;
-		let moveY = mouseY - this.user.y;
-		let hypo = Math.sqrt(Math.pow(moveX,2) + Math.pow(moveY,2));
-		let moveAngle = (Math.atan2(moveY,moveX) * (180 / Math.PI) + 90 + 360) % 360;
-		console.log(moveX,moveY,hypo,Math.atan2(moveY,-moveX),moveAngle);
-		this.stage.setMyAvatar(mouseX,mouseY,moveAngle);
+		if(mouseButton === LEFT){
+			let moveX = mouseX - this.user.x;
+			let moveY = mouseY - this.user.y;
+			let hypo = Math.sqrt(Math.pow(moveX,2) + Math.pow(moveY,2));
+			let moveAngle = (Math.atan2(moveY,moveX) * (180 / Math.PI) + 90 + 360) % 360;
+			console.log(moveX,moveY,hypo,Math.atan2(moveY,-moveX),moveAngle);
+			this.stage.setMyAvatar(mouseX,mouseY,moveAngle);
 
-		this.user = {...this.user, x: mouseX, y: mouseY ,angle: moveAngle}
+			this.user = {...this.user, x: mouseX, y: mouseY ,angle: moveAngle}
+		}else if(mouseButton === RIGHT){
+			this.contextMenu.setVisible(true);
+			this.contextMenu.setPosition(mouseX, mouseY - 5);
+		}
 	}
 	setData(otheruser){
 		this.otheruser = otheruser;
@@ -88,6 +101,7 @@ class Screen{
 		clear();
 		this.menu.draw();
 		this.stage.draw();
+		this.contextMenu.draw();
 	}
 }
 
@@ -100,4 +114,8 @@ function setup(){
 function draw(){
 	config.tick += 1;
 	screen.draw();
+}
+
+document.oncontextmenu = (e) => {
+	e.preventDefault();
 }
