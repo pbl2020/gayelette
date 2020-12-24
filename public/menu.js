@@ -1,5 +1,5 @@
 function easeInOutQuad(x) {
-	return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
+    return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
 }
 
 function checkMenuItemDiff(newObject, oldObject, instance) {
@@ -51,27 +51,27 @@ function checkMenuItemDiff(newObject, oldObject, instance) {
 }
 class Touchable {
 
-	onClick = null;
+    onClick = null;
 
-	_prevMouseIsPressed = false;
+    _prevMouseIsPressed = false;
 
-	_shouldEventExecute(){
-		if(!this._prevMouseIsPressed && mouseIsPressed && this.isClicked(mouseX, mouseY))
-			this.onClick && this.onClick();
-		this._prevMouseIsPressed = mouseIsPressed;
-	}
+    _shouldEventExecute() {
+        if (!this._prevMouseIsPressed && mouseIsPressed && this.isClicked(mouseX, mouseY))
+            this.onClick && this.onClick();
+        this._prevMouseIsPressed = mouseIsPressed;
+    }
 
-	isClicked(x, y){
-		return false;
-	};
+    isClicked(x, y) {
+        return false;
+    };
 
-	setClickHandler(event){
-		this.onClick = event;
-	}
+    setClickHandler(event) {
+        this.onClick = event;
+    }
 
-	draw(){
-		this._shouldEventExecute();
-	}
+    draw() {
+        this._shouldEventExecute();
+    }
 }
 
 class MenuItem extends Touchable {
@@ -212,7 +212,6 @@ class MenuList {
                 else this.open()
                 this.handleClickItem(item)
             })
-            
             item.draw();
         })
         pop();
