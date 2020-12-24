@@ -11,7 +11,8 @@ const port1 = 3000;
 const port2 = 3001;
 
 // const PATH = "D:/github/gayelette-server";
-const PATH = "C:/Users/S.Kite/Documents/Github/gayelette";
+// const PATH = "C:/Users/S.Kite/Documents/Github/gayelette";
+const PATH = "/Users/ok/Documents/GitHub/gayelette";
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
