@@ -1,6 +1,4 @@
-function CheckObjectDiff( newObject, oldObject,instance)
-{
-
+function CheckObjectDiff( newObject, oldObject,instance){
 	var check =[];
 	for (let j = 0; j < newObject.length; j++){
 		let flag = false;
@@ -21,7 +19,6 @@ function CheckObjectDiff( newObject, oldObject,instance)
 		}
 		if(flag == false){
 	    	instance.push(new Avatar(newObject[j].name,newObject[j].id,newObject[j].x,newObject[j].y,newObject[j].size,newObject[j].angle));
-
 		}
 	}
 
@@ -30,21 +27,17 @@ function CheckObjectDiff( newObject, oldObject,instance)
 		for (let j = 0; j < newObject.length; j++){
 			if(oldObject[i].id == newObject[j].id){
 				flag = true;
+			}
 		}
-
-
-	}
 		if(flag == false){
-		for (let k = 0; k < instance.length; k++){
-			if(oldObject[i].id == instance[k].id){
-				instance.splice(k,1);
-				break;
+			for (let k = 0; k < instance.length; k++){
+				if(oldObject[i].id == instance[k].id){
+					instance.splice(k,1);
+					break;
+				}
 			}
 		}
 	}
-}
-
-
 	return instance;
 }
 class Stage extends Touchable{
@@ -64,10 +57,7 @@ class Stage extends Touchable{
 	    }
 	    */
 
-	    this.myAvatar = new Avatar(myAvatar.name,myAvatar.id,myAvatar.x,myAvatar.y,
-	    				myAvatar.size,myAvatar.angle);
-
-
+	    this.myAvatar = new Avatar(myAvatar.name,myAvatar.id,myAvatar.x,myAvatar.y,	myAvatar.size,myAvatar.angle);
   	}
 	draw(){
 		super.draw()
@@ -95,5 +85,4 @@ class Stage extends Touchable{
 		this.avatars=CheckObjectDiff(avatars,this.oldAvatars,this.avatars);
 		this.oldAvatars = avatars;
 	}
-
 }

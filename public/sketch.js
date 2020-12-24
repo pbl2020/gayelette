@@ -103,7 +103,8 @@ class Screen{
 }
 
 var screen;
-function setup(){
+
+function setup() {
 	createCanvas(windowWidth, windowHeight);
 	screen = new Screen();
 }
