@@ -81,7 +81,6 @@ class Stage extends Touchable{
 	isHover(mouseX, mouseY){
 		const fragX = mouseX < windowWidth - 300;
 		const fragY = mouseY < windowHeight;
-		console.log(fragX, fragY)
 		return fragX && fragY;
 	}
 	setClick(onClick){
@@ -94,7 +93,6 @@ class Stage extends Touchable{
 	setAvatars(avatars){
 		//this.avatars =[];
 		this.avatars=CheckObjectDiff(avatars,this.oldAvatars,this.avatars);
-		console.log(this.avatars);
 		this.oldAvatars = avatars;
 	}
 

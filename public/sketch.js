@@ -49,7 +49,6 @@ class Screen{
 			onClick: () => {console.log("プレゼンテーション")}
 		}]);
 		this.stage.setClick(this.handleClick.bind(this));
-		console.log(this.otheruser);
 		this.setData(this.otheruser);
 		setTimeout(()=>{
 			this.setData( [
@@ -75,13 +74,12 @@ class Screen{
 
 	}
 	handleClick(){
-		console.log(mouseX,mouseY);
+
 		if(mouseButton === LEFT){
 			let moveX = mouseX - this.user.x;
 			let moveY = mouseY - this.user.y;
 			let hypo = Math.sqrt(Math.pow(moveX,2) + Math.pow(moveY,2));
 			let moveAngle = (Math.atan2(moveY,moveX) * (180 / Math.PI) + 90 + 360) % 360;
-			console.log(moveX,moveY,hypo,Math.atan2(moveY,-moveX),moveAngle);
 			this.stage.setMyAvatar(mouseX,mouseY,moveAngle);
 
 			this.user = {...this.user, x: mouseX, y: mouseY ,angle: moveAngle}
@@ -93,8 +91,6 @@ class Screen{
 	setData(otheruser){
 		this.otheruser = otheruser;
 		this.stage.setAvatars(otheruser);
-		console.log(this.otheruser);
-
 	}
 	draw(){
 
