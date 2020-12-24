@@ -36,7 +36,7 @@ class MenuItem extends Touchable{
 		if(icon) this.img = loadImage(icon)
 	}
 
-	isClicked(mouseX, mouseY){
+	isHover(mouseX, mouseY){
 		const fragX = this.x < mouseX && mouseX < this.x + this.width;
 		const fragY = this.y < mouseY && mouseY < this.y + this.height;
 		return fragX && fragY;

@@ -98,5 +98,6 @@ function setup(){
 }
 
 function draw(){
+	config.tick += 1;
 	screen.draw();
 }
