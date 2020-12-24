@@ -10,7 +10,7 @@ function checkMenuItemDiff(newObject, oldObject, instance) {
         for (let i = 0; i < oldObject.length; i++) {
             //idが同じだったら
             if (oldObject[i].id == newObject[j].id) {
-                for (let k = 0; k < oldObject.length; k ++) {
+                for (let k = 0; k < oldObject.length; k++) {
                     if (oldObject[i].id == instance[k].id) {
                         instance[k].name = newObject[j].name;
                     }
@@ -126,13 +126,21 @@ class MenuItem extends Touchable {
 
     draw() {
         super.draw();
+        var primaryColor = '#505160';
+        var primaryVariant = '#68828e';
+        var secondaryColor = '#aebd38';
+        var secondaryVariant = '#598234';
+        var fontColor = '#ffffff';
+        //fill(primaryVariant);
 
         const padding = 5;
         const r2 = this.height - padding * 2;
         const fontSize = 10;
-
         ellipse(this.x + r2 / 2 + padding, this.y + r2 / 2 + padding, r2, r2);
+        push();
+        fill(fontColor);
         text(this.name, this.x + r2 + padding * 4, this.y + this.height / 2 + fontSize / 2);
+        pop();
         this.img && image(this.img, this.x + padding, this.y + padding, r2, r2);
     }
 }
@@ -144,7 +152,7 @@ class MenuList {
     x = 100;
     y = 100;
     width = 300;
-    height = 300;
+    height = windowHeight;
 
     isOpen = false;
     frameRate = 50;
@@ -178,7 +186,11 @@ class MenuList {
     }
 
     draw() {
-
+        var primaryColor = '#505160';
+        var primaryVariant = '#68828e';
+        var secondaryColor = '#aebd38';
+        var secondaryVariant = '#598234';
+        background(primaryColor);
         const paddingItems = 15;
         const iconSize = 50;
 
@@ -190,7 +202,8 @@ class MenuList {
             this.mx = (this.x + this.width - iconSize) - (this.width - iconSize) * easeInOutQuad(this.f / this.frameRate);
             this.f += 1;
         }
-
+        push();
+        fill(primaryVariant);
         rect(this.mx, this.my, this.width, this.height);
         this.items.forEach((item, i) => {
             item.setPosition(this.mx, this.my + (item.height + paddingItems) * i);
@@ -201,6 +214,7 @@ class MenuList {
             })
             item.draw();
         })
+        pop();
     }
     setMenuData(items) {
         this.items = checkMenuItemDiff(items, this.oldItems, this.items);

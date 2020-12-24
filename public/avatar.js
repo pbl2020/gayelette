@@ -24,12 +24,17 @@ class Avatar{
       this.ff--
 
     }
+    let viewColor = "#B5FF14";
+    let ellipseColor ="#FFFFFF";
   	let pointy = this.size
   	let pointx = this.size/2
     // draw
     translate(this.x,this.y)
     rotate(radians(this.angle))
-    triangle(0,0-pointy,0-pointx,0,0+pointx,0)
+    //triangle(0,0-pointy,0-pointx,0,0+pointx,0)
+    fill(viewColor);
+    arc(0, 0, 90, 90, radians(-135),radians(-45), PIE);
+    fill(ellipseColor);
     ellipse(0,0,this.size,this.size)
 
     point(this.x,this.y)
