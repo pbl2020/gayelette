@@ -1,4 +1,4 @@
-function CheckObjectDiff(newObject, oldObject, instance) {
+function checkObjectDiff(newObject, oldObject, instance) {
 
 	var check = [];
 	for (let j = 0; j < newObject.length; j++) {
@@ -20,7 +20,6 @@ function CheckObjectDiff(newObject, oldObject, instance) {
 		}
 		if (flag == false) {
 			instance.push(new Avatar(newObject[j].name, newObject[j].id, newObject[j].x, newObject[j].y, newObject[j].size, newObject[j].angle));
-
 		}
 	}
 
@@ -30,8 +29,6 @@ function CheckObjectDiff(newObject, oldObject, instance) {
 			if (oldObject[i].id == newObject[j].id) {
 				flag = true;
 			}
-
-
 		}
 		if (flag == false) {
 			for (let k = 0; k < instance.length; k++) {
@@ -42,8 +39,6 @@ function CheckObjectDiff(newObject, oldObject, instance) {
 			}
 		}
 	}
-
-
 	return instance;
 }
 
@@ -64,22 +59,17 @@ class Stage extends Touchable {
 		}
 		*/
 
-		this.myAvatar = new Avatar(myAvatar.name, myAvatar.id, myAvatar.x, myAvatar.y,
-			myAvatar.size, myAvatar.angle);
-
-
-	}
-	draw() {
+	    this.myAvatar = new Avatar(myAvatar.name,myAvatar.id,myAvatar.x,myAvatar.y,	myAvatar.size,myAvatar.angle);
+  	}
+	draw(){
 		super.draw()
 		this.myAvatar.draw();
-		for (let i = 0; i < this.avatars.length; i++) {
-			if (this.avatars[i])
-				this.avatars[i].draw();
-
-		}
+  	for (let i =0; i < this.avatars.length;i++){
+    	if(this.avatars[i])
+	   		this.avatars[i].draw();
+    }
 	}
-
-	isClicked(mouseX, mouseY) {
+	isHover(mouseX, mouseY){
 		const fragX = mouseX < windowWidth - 300;
 		const fragY = mouseY < windowHeight;
 		return fragX && fragY;
@@ -93,9 +83,7 @@ class Stage extends Touchable {
 
 	setAvatars(avatars) {
 		//this.avatars =[];
-		this.avatars = CheckObjectDiff(avatars, this.oldAvatars, this.avatars);
-		console.log(this.avatars);
+		this.avatars = checkObjectDiff(avatars, this.oldAvatars, this.avatars);
 		this.oldAvatars = avatars;
 	}
-
 }

@@ -3,7 +3,6 @@ function easeInOutQuad(x) {
 }
 
 function checkMenuItemDiff(newObject, oldObject, instance) {
-
 	var check = [];
 	for (let j = 0; j < newObject.length; j++) {
 		let flag = false;
@@ -45,33 +44,7 @@ function checkMenuItemDiff(newObject, oldObject, instance) {
 			}
 		}
 	}
-
-
 	return instance;
-}
-class Touchable {
-
-	onClick = null;
-
-	_prevMouseIsPressed = false;
-
-	_shouldEventExecute() {
-		if (!this._prevMouseIsPressed && mouseIsPressed && this.isClicked(mouseX, mouseY))
-			this.onClick && this.onClick();
-		this._prevMouseIsPressed = mouseIsPressed;
-	}
-
-	isClicked(x, y) {
-		return false;
-	};
-
-	setClickHandler(event) {
-		this.onClick = event;
-	}
-
-	draw() {
-		this._shouldEventExecute();
-	}
 }
 
 class MenuItem extends Touchable {
@@ -113,7 +86,7 @@ class MenuItem extends Touchable {
 		if (icon) this.img = loadImage(icon)
 	}
 
-	isClicked(mouseX, mouseY) {
+	isHover(mouseX, mouseY) {
 		const fragX = this.x < mouseX && mouseX < this.x + this.width;
 		const fragY = this.y < mouseY && mouseY < this.y + this.height;
 		return fragX && fragY;
@@ -158,6 +131,7 @@ class MenuList {
 	frameRate = 50;
 	f = 50;
 
+	items = [];
 	oldItems = [];
 
 	constructor(x, y, onClick) {

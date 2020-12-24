@@ -1,7 +1,8 @@
-class Screen {
+class Screen{
 	menu = null;
 	avatar = null;
 	stage = null;
+	contextMenu = null;
 	moveX = 0;
 	moveY = 0;
 	hypo = 0;
@@ -22,7 +23,6 @@ class Screen {
 			size: 30,
 			angle: 90
 		},
-
 		{
 			name: "masuda",
 			id: "0312018088",
@@ -33,17 +33,27 @@ class Screen {
 		}
 	]
 
-	constructor() {
+	constructor(){
 		this.menu = new MenuList(windowWidth - 300, 0);
 		this.stage = new Stage(this.user);
+		this.contextMenu = new ContextMenu([{
+			text: "新規作成",
+			onClick: () => {console.log("新規作成")}
+		}, {
+			text: "  会議室",
+			onClick: () => {console.log("会議室")}
+		}, {
+			text: "  プレゼンテーション",
+			onClick: () => {console.log("プレゼンテーション")}
+		}]);
 		this.stage.setClick(this.handleClick.bind(this));
-		console.log(this.otheruser);
 		this.setData(this.otheruser);
-		setTimeout(() => {
-			this.setData([{
-					name: "shimi",
+		setTimeout(()=>{
+			this.setData( [
+				{
+					name: "shimizu",
 					id: "0312018087",
-					x: 400,
+					x: 400, 
 					y: 400,
 					size: 30,
 					angle: 90
@@ -65,29 +75,36 @@ class Screen {
 					angle: 90
 				}
 			])
-		}, 5000);
-	}
-	handleClick() {
-		let moveX = mouseX - this.user.x;
-		let moveY = mouseY - this.user.y;
-		let hypo = Math.sqrt(Math.pow(moveX, 2) + Math.pow(moveY, 2));
-		let moveAngle = (Math.atan2(moveY, moveX) * (180 / Math.PI) + 90 + 360) % 360;
-		this.stage.setMyAvatar(mouseX, mouseY, moveAngle);
+		},5000);
 
-		this.user = { ...this.user, x: mouseX, y: mouseY, angle: moveAngle }
+
 	}
-	setData(otheruser) {
+	handleClick(){
+		this.contextMenu.setVisible(false);
+
+		if(mouseButton === LEFT){
+			let moveX = mouseX - this.user.x;
+			let moveY = mouseY - this.user.y;
+			let hypo = Math.sqrt(Math.pow(moveX,2) + Math.pow(moveY,2));
+			let moveAngle = (Math.atan2(moveY,moveX) * (180 / Math.PI) + 90 + 360) % 360;
+			this.stage.setMyAvatar(mouseX,mouseY,moveAngle);
+
+			this.user = {...this.user, x: mouseX, y: mouseY ,angle: moveAngle}
+		}else if(mouseButton === RIGHT){
+			this.contextMenu.setVisible(true);
+			this.contextMenu.setPosition(mouseX, mouseY - 5);
+		}
+	}
+	setData(otheruser){
 		this.otheruser = otheruser;
 		this.stage.setAvatars(otheruser);
-		this.menu.setMenuData(otheruser);
-		console.log(this.otheruser);
-
 	}
-	draw() {
+	draw(){
 
 		clear();
 		this.menu.draw();
 		this.stage.draw();
+		this.contextMenu.draw();
 	}
 }
 
@@ -96,9 +113,11 @@ var screen;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	screen = new Screen();
-
 }
-
-function draw() {
+function draw(){
+	config.tick += 1;
 	screen.draw();
+}
+document.oncontextmenu = (e) => {
+	e.preventDefault();
 }
