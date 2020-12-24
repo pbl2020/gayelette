@@ -38,11 +38,12 @@ class ContextMenuItem extends Touchable{
 	}
 }
 
-class ContextMenu{
+class ContextMenu extends Touchable{
 	x = 0;
 	y = 0;
 	visible = false;
 
+	zIndex = 3;
 	width = 150;
 	paddingY = 5;
 	itemHeight = 20;
@@ -51,12 +52,17 @@ class ContextMenu{
 		text: "sample",
 		onClick: () => {}
 	}];
+
 	constructor(item){
+		super();
 		this.item = item.map(i => {
 			const obj = new ContextMenuItem(i.text);
 			obj.setClickHandler(i.onClick);
 			return obj;
 		});
+		this.onClick = () =>{
+			this.setVisible(false);
+		}
 	}
 
 	setItem(item){
@@ -76,7 +82,13 @@ class ContextMenu{
 		this.y = y;
 	}
 
+	isHover(){
+		return this.visible;
+	}
+
 	draw(){
+		super.draw();
+
 		if(!this.visible)
 			return;
 

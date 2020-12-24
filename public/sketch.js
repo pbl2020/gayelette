@@ -74,6 +74,7 @@ class Screen{
 
 	}
 	handleClick(){
+		this.contextMenu.setVisible(false);
 
 		if(mouseButton === LEFT){
 			let moveX = mouseX - this.user.x;
