@@ -7,14 +7,13 @@ class Touchable{
 	onClick = null;
 	zIndex = 1;
 
-
 	_shouldEventExecute(){
-		if(this.frame !== config.tick){
+		if(Touchable.frame !== config.tick){
 			// クリックされたならzIndexが高い順に探索し、クリックされたオブジェクトのonClickを発火させる
-			if(!this._prevMouseIsPressed && mouseIsPressed){
-				this.objList.sort((a, b) => b.zIndex - a.zIndex);
-				for(let i = 0; i < this.objList.length; i++){
-					const obj = this.objList[i];
+			if(!Touchable._prevMouseIsPressed && mouseIsPressed){
+				Touchable.objList.sort((a, b) => b.zIndex - a.zIndex);
+				for(let i = 0; i < Touchable.objList.length; i++){
+					const obj = Touchable.objList[i];
 					if(obj.isHover(mouseX, mouseY) && obj.onClick){
 						obj.onClick();
 						break;
@@ -22,12 +21,12 @@ class Touchable{
 				}
 			}
 
-			this.frame = config.tick;
-			this.objList = [];
+			Touchable.frame = config.tick;
+			Touchable.objList = [];
 		}
 
-		this.objList.push(this);
-		this._prevMouseIsPressed = mouseIsPressed;
+		Touchable.objList.push(this);
+		Touchable._prevMouseIsPressed = mouseIsPressed;
 	}
 
 	isHover(x, y){
