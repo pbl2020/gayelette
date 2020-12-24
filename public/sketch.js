@@ -7,28 +7,26 @@ class Screen{
 	moveY = 0;
 	hypo = 0;
 	moveAngle = 0;
-	user ={
+	user = {
 		name: "koyama",
 		id: "0312018086",
-		x: 100, 
+		x: 100,
 		y: 200,
 		size: 30,
 		angle: 0
 	};
-	otheruser =[
-		{
+	otheruser = [{
 			name: "shimizu",
 			id: "0312018087",
-			x: 150, 
+			x: 150,
 			y: 250,
 			size: 30,
 			angle: 90
 		},
-
 		{
 			name: "masuda",
 			id: "0312018088",
-			x: 200, 
+			x: 200,
 			y: 300,
 			size: 30,
 			angle: 45
@@ -63,7 +61,15 @@ class Screen{
 				{
 					name: "koyama",
 					id: "0312018062",
-					x: 100, 
+					x: 100,
+					y: 100,
+					size: 30,
+					angle: 90
+				},
+				{
+					name: "oota",
+					id: "0312018063",
+					x: 300,
 					y: 100,
 					size: 30,
 					angle: 90
@@ -108,12 +114,10 @@ function setup() {
 	createCanvas(windowWidth, windowHeight);
 	screen = new Screen();
 }
-
 function draw(){
 	config.tick += 1;
 	screen.draw();
 }
-
 document.oncontextmenu = (e) => {
 	e.preventDefault();
 }
