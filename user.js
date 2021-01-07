@@ -5,7 +5,7 @@ const router = express.Router();
 const sqlite3 = require('sqlite3');
 
 //DB objectの取得
-const db = require('../models/index');
+const db = require('./models/index');
 
 router.use(express.json());
 
