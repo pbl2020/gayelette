@@ -17,11 +17,17 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.post("/", (req, res) =>{ //addUser
-	const date = Date.now();
-
-	userData[date] = req.body;
-	res.status(200).send("OK!");
+router.post("/", (req, res) =>{
+	db.User.create({
+		id: Date.now(),
+		name: req.body.name,
+		mail: req.body.mail,
+		pass: req.body.pass
+	}).then(() =>{
+		res.status(200).redirect("rooms.html");
+	}).catch((err) =>{
+		res.status(500).send(err);
+	})
 })
 
 

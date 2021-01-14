@@ -40,8 +40,8 @@ function onResister(){
 		},
 		body: JSON.stringify({
 			mail: mail,
-			username: username,
-			password: password
+			name: username,
+			pass: password
 		})
 	}
 
@@ -49,7 +49,7 @@ function onResister(){
 	console.log(url, option);
 
 	fetch(url, option).then(res =>{
-		window.location.href = "rooms.html"
+		// pass
 	}).catch(error => {
 		console.log("error: ", error);
 	})
