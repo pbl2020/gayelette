@@ -18,17 +18,19 @@ router.get('/', (req, res, next) => {
 });
 
 router.post("/", (req, res) =>{
+	const id = Date.now().toString();
 	db.User.create({
-		id: Date.now(),
+		id: id,
 		name: req.body.name,
 		mail: req.body.mail,
 		pass: req.body.pass
 	}).then(() =>{
-		res.status(200).redirect("rooms.html");
+		res.status(200).json({
+			id: id
+		})
 	}).catch((err) =>{
 		res.status(500).send(err);
 	})
 })
-
 
 module.exports = router;

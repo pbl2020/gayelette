@@ -24,6 +24,18 @@ async function showWrapper(node){
 	})
 }
 
+function writeCookie(key, value) {
+	document.cookie = key + "=" + value;
+}
+
+// 読み込み
+function readCookie(key) {
+	var tmp = document.cookie;
+	var reg = new RegExp("/(?:(?:^|.*;\s*)" + key + "\\s*\=\s*([^;]*).*$)|^.*$/")
+	var cookieValue = document.cookie.replace(reg, "$1");
+	return cookieValue;
+}
+
 function onResister(){
 	const mail = $("#input-mail").val();
 	const username = $("#input-username").val();
@@ -49,7 +61,8 @@ function onResister(){
 	console.log(url, option);
 
 	fetch(url, option).then(res =>{
-		// pass
+		writeCookie("userId", res.body.id);
+		window.location.href = "rooms.html";
 	}).catch(error => {
 		console.log("error: ", error);
 	})
