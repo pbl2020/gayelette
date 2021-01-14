@@ -1,5 +1,29 @@
 const domain = "https://localhost:3001/";
 
+async function onChangePage(page){
+	const nodeResister = $("#wrapperResister");
+	const nodeLogin = $("#wrapperLogin");
+	if(page === "resister"){
+		await closeWrapper(nodeLogin);
+		await showWrapper(nodeResister);
+	}else{
+		await closeWrapper(nodeResister);
+		await showWrapper(nodeLogin);
+	}
+}
+
+async function closeWrapper(node){
+	return new Promise((resolve, reject) =>{
+		node.hide("clip", {direction: "horizontal"}, 500, () => resolve());
+	})
+}
+
+async function showWrapper(node){
+	return new Promise((resolve, reject) =>{
+		node.show("clip", {direction: "horizontal"}, 500, () => resolve());
+	})
+}
+
 function onResister(){
 	const mail = $("#input-mail").val();
 	const username = $("#input-username").val();
@@ -30,3 +54,5 @@ function onResister(){
 		console.log("error: ", error);
 	})
 }
+
+$("#wrapperLogin").hide();

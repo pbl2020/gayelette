@@ -4,25 +4,37 @@
 	--secondary-color: #ddbc95;
 	--secondary-variant: #b38867;
 	--font-color: #ffffff;
+
+	--secondary-variant-hover: #B37647;
 }
 html, body{
 	padding: 0;
 	margin: 0;
 	width: 100%;
 	min-height: 100%;
+	height: 100%;
 	position: relative;
 	background-color: var(--primary-variant);
+	font-family: Whitney, Hiragino Sans, ヒラギノ角ゴ ProN W3, Hiragino Kaku Gothic ProN, メイリオ, Meiryo, Osaka, MS PGothic, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 .wrapper{
 	position: absolute;
 	top: 0;
 	right: 0;
+	bottom: 0;
 	left: 0;
 	background-color: var(--primary-color);
 	width: 600px;
-	margin: 50px auto;
+	margin: auto;
 	padding: 20px 5px 20px 5px;
-	box-shadow: 0px 0px 0px #999999;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #333;
+}
+.wrapper-resister{
+	height: 400px;
+}
+.wrapper-login{
+	height: 320px;
 }
 .title{
 	padding: 50px auto;
@@ -40,9 +52,15 @@ html, body{
 	color: var(--primary-variant);
 }
 .input-group-form{
+	background-color: var(--primary-variant);
 	box-sizing: border-box;
 	width: 100%;
 	height: 40px;
+	border: 1px solid var(--primary-variant);
+}
+.input-group-form:hover{
+	border: 1px solid #000;
+	transition: 500ms;
 }
 .button-container{
 	margin: auto;
@@ -50,17 +68,36 @@ html, body{
 	height: 35px;
 }
 .button{
-	background-color: var(--secondary-color);
-	color: var(--primary-color);
+	background-color: var(--secondary-variant);
+	color: var(--font-color);
 	width: 100%;
 	height: 100%;
 	border: none;
 	cursor: pointer;
 }
+.button:hover{
+	background-color: var(--secondary-variant-hover);
+	transition: 500ms;
+}
+
+.bottom-text-container{
+	width: 70%;
+	margin: 0px auto;
+}
+
+.bottom-text{
+	font-size: 15px;
+	color: var(--primary-variant);
+	cursor: pointer;
+}
+.bottom-text:hover{
+	text-decoration: underline;
+}
 
 .room-list{
 	width: 90%;
 	margin: 30px auto 0 auto;
+	overflow-y: scroll;
 }
 
 .room-container{
