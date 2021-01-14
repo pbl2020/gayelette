@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Room.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     skywayKey: DataTypes.STRING,
     name: DataTypes.STRING,
     admin: DataTypes.STRING

@@ -2,16 +2,16 @@
   "development": {
     "username": "db-development",
     "dialect": "sqlite",
-    "storage": "gayelette.sqlite3"
+    "storage": "gayelette.db"
   },
   "test": {
     "username": "db-test",
     "dialect": "sqlite",
-    "storage": "db-test.sqlite3"
+    "storage": "db-test.db"
   },
   "production": {
     "username": "db-product",
     "dialect": "sqlite",
-    "storage": "db.sqlite3"
+    "storage": "db.db"
   }
 }
