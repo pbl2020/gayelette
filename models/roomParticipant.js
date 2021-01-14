@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   RoomParticipant.init({
-    roomId: DataTypes.STRING,
-    userId: DataTypes.STRING,
+    roomId: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
+    userId: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     username: DataTypes.STRING,
     role: DataTypes.STRING,
     x: DataTypes.INTEGER,

@@ -14,13 +14,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   User.init({
-    id: DataTypes.STRING,
+    id: {
+      type: DataTypes.STRING,
+      primaryKey: true
+    },
     name: DataTypes.STRING,
     mail: DataTypes.STRING,
-    pass: DataTypes.STRING
+    pass: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'User',
+    freezeTableName: true,
+    timestamps: false
   });
   return User;
 };

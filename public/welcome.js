@@ -24,6 +24,18 @@ async function showWrapper(node){
 	})
 }
 
+function writeCookie(key, value) {
+	document.cookie = key + "=" + value;
+}
+
+// 読み込み
+function readCookie(key) {
+	var tmp = document.cookie;
+	var reg = new RegExp("/(?:(?:^|.*;\s*)" + key + "\\s*\=\s*([^;]*).*$)|^.*$/")
+	var cookieValue = document.cookie.replace(reg, "$1");
+	return cookieValue;
+}
+
 function onResister(){
 	const mail = $("#input-mail").val();
 	const username = $("#input-username").val();
@@ -40,8 +52,8 @@ function onResister(){
 		},
 		body: JSON.stringify({
 			mail: mail,
-			username: username,
-			password: password
+			name: username,
+			pass: password
 		})
 	}
 
@@ -49,7 +61,38 @@ function onResister(){
 	console.log(url, option);
 
 	fetch(url, option).then(res =>{
-		window.location.href = "rooms.html"
+		writeCookie("userId", res.body.id);
+		window.location.href = "rooms.html";
+	}).catch(error => {
+		console.log("error: ", error);
+	})
+}
+
+function onResister(){
+	const mail = $("#input-mail").val();
+	const password = $("#input-password").val();
+
+	const option = {
+		method: 'POST', // *GET, POST, PUT, DELETE, etc.
+		mode: 'cors', // no-cors, *cors, same-origin
+		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+		credentials: 'same-origin', // include, *same-origin, omit
+		headers: {
+			'Content-Type': 'application/json'
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		body: JSON.stringify({
+			mail: mail,
+			pass: password
+		})
+	}
+
+	const url = domain + "login";
+	console.log(url, option);
+
+	fetch(url, option).then(res =>{
+		writeCookie("userId", res.body.id);
+		window.location.href = "rooms.html";
 	}).catch(error => {
 		console.log("error: ", error);
 	})
