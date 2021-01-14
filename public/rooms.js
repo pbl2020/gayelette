@@ -1,14 +1,28 @@
+function writeCookie(key, value) {
+	document.cookie = key + "=" + value;
+}
+
+// 読み込み
+function readCookie(key) {
+	var tmp = document.cookie;
+	var reg = new RegExp("/(?:(?:^|.*;\s*)" + key + "\\s*\=\s*([^;]*).*$)|^.*$/")
+	var cookieValue = document.cookie.replace(reg, "$1");
+	return cookieValue;
+}
+
 async function fetchRooms(){
 	return new Promise((resolve, reject) =>{
 		setTimeout(() =>{
 			resolve([{
+				id: "PBL2020-Team6",
+				skywayKey: "aiueo",
 				name: "PBL2020-Team6",
+				admin: "g031q062"
 			}, {
+				id: "PBL2020-Team6",
+				skywayKey: "aiueo",
 				name: "test",
-			}, {
-				name: "test",
-			}, {
-				name: "test",
+				admin: "g031q062"
 			}])
 		}, 5000)
 	})
@@ -27,6 +41,10 @@ function renderRoom(){
 			+
 		</button>
 	`;
+}
+
+function onJoinRoom(id){
+	writeCookie("roomId", id);
 }
 
 function createRoomTag(room){

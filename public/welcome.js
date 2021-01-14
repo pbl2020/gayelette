@@ -68,4 +68,34 @@ function onResister(){
 	})
 }
 
+function onResister(){
+	const mail = $("#input-mail").val();
+	const password = $("#input-password").val();
+
+	const option = {
+		method: 'POST', // *GET, POST, PUT, DELETE, etc.
+		mode: 'cors', // no-cors, *cors, same-origin
+		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+		credentials: 'same-origin', // include, *same-origin, omit
+		headers: {
+			'Content-Type': 'application/json'
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+		},
+		body: JSON.stringify({
+			mail: mail,
+			pass: password
+		})
+	}
+
+	const url = domain + "login";
+	console.log(url, option);
+
+	fetch(url, option).then(res =>{
+		writeCookie("userId", res.body.id);
+		window.location.href = "rooms.html";
+	}).catch(error => {
+		console.log("error: ", error);
+	})
+}
+
 $("#wrapperLogin").hide();
