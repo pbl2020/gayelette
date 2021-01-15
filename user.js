@@ -12,9 +12,13 @@ router.use(express.json());
 var userData = {};
 
 router.get('/', (req, res, next) => {
-  db.User.findAll().then(usrs => {
-    res.json(usrs);
-  });
+	db.User.findAll(
+		{
+			where: {id: req.body.userId}
+		}
+	).then(usrs => {
+		res.json(usrs);
+	});
 });
 
 router.post("/", (req, res) =>{

@@ -16,7 +16,16 @@ router.post("/", (req, res) =>{
 	// 「存在するならば 200 を返す」
 	// 「存在しないならば 500 を返す」
 	// 処理を書く
-
-})
+	db.User.count(
+		{
+			where: {mail: mail, pass: pass}
+		}
+	).then(dataCount => {
+			if(dataCount > 0)
+				res.sendStatus(200).send("OK");
+			else
+				res.sendStatus(500).send("Not found");
+	});
+});
 
 module.exports = router;

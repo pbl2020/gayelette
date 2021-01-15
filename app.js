@@ -6,6 +6,9 @@ const https = require('https');
 const app = express();
 
 const userRouter = require("./user.js");
+const participantRouter = require("./participant.js");
+const roomRouter = require("./room.js");
+const loginRouter = require("./login.js");
 
 const port1 = 3000;
 const port2 = 3001;
@@ -24,6 +27,10 @@ app.get("/",function(req,res){
 });
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/user", userRouter);
+app.use("/participant", participantRouter);
+app.use("/room", roomRouter);
+app.use("/login", loginRouter);
+
 
 app.use((req, res) => {
   res.sendStatus(404);
