@@ -1,3 +1,5 @@
+const domain = "https://localhost:3001/";
+
 function writeCookie(key, value) {
 	document.cookie = key + "=" + value;
 }
@@ -45,6 +47,7 @@ function renderRoom(){
 
 function onJoinRoom(id){
 	writeCookie("roomId", id);
+	window.location.href = domain + "index.html";
 }
 
 function createRoomTag(room){
@@ -56,7 +59,7 @@ function createRoomTag(room){
 			<div class="room-members">
 			</div>
 			<div class="button-container">
-				<button class="button" onclick="onResister()">
+				<button class="button" onclick="onJoinRoom('${room.id}')">
 					JOIN!!
 				</button>
 			</div>
