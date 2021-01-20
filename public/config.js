@@ -1,7 +1,7 @@
 const config = {
 	startTime: Date.now(),
-	userId: "",
-	roomId: "",
+	user: {},
+	room: {},
 	tick: 0,
 
 	serverUrl: "https://localhost:3001/"

@@ -1,4 +1,4 @@
-$(function(){
+function connectRoom(roomId){
 	let localStream = null;
 	let peer = null;
 	let existingCall = null;
@@ -46,7 +46,7 @@ $(function(){
 		if (!roomName) {
 			return;
 		}
-		const　call = peer.joinRoom(roomName, {mode: 'sfu', stream: localStream});
+		const　call = peer.joinRoom(roomId, {mode: 'sfu', stream: localStream});
 		setupCallEventHandlers(call);
 	});
 
@@ -140,10 +140,17 @@ $(function(){
 		$('#make-call').hide();
 		$('#end-call').show();
 	}
+}
 
-});
+function readCookie(key) {
+	var tmp = document.cookie;
+	var reg = new RegExp("/(?:(?:^|.*;\s*)" + key + "\\s*\=\s*([^;]*).*$)|^.*$/")
+	var cookieValue = document.cookie.replace(reg, "$1");
+	return cookieValue;
+}
 
-function sendPosture(x, y, angle, roomId, userId){
+const sendPosture = async(x, y, angle, roomId, userId) =>{
+	console.log(roomId, userId);
 	const option = {
 		method: 'POST', // *GET, POST, PUT, DELETE, etc.
 		mode: 'cors', // no-cors, *cors, same-origin
@@ -162,8 +169,73 @@ function sendPosture(x, y, angle, roomId, userId){
 	console.log(url, option);
 
 	fetch(url, option).then(res =>{
-		writeCookie("userId", res.body.id);
 	}).catch(error => {
 		console.log("error: ", error);
 	})
 }
+
+const getPosture = async(x, y, angle, roomId, userId) =>{
+	const option = {
+		method: 'GET', // *GET, POST, PUT, DELETE, etc.
+		mode: 'cors', // no-cors, *cors, same-origin
+		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+		credentials: 'same-origin', // include, *same-origin, omit
+		headers: {
+			'Content-Type': 'application/json'
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	}
+
+	const url = config.serverUrl + "participant";
+	console.log(url, option);
+
+	return await fetch(url, option).then(res => res).catch(error => {
+		console.log("error: ", error);
+	})
+}
+
+const getUser = async () => {
+	const option = {
+		method: 'GET', // *GET, POST, PUT, DELETE, etc.
+		mode: 'cors', // no-cors, *cors, same-origin
+		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+		credentials: 'same-origin', // include, *same-origin, omit
+		headers: {
+			'Content-Type': 'application/json'
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	}
+
+	const url = config.serverUrl + "user&userId=" + readCookie("userId");
+	console.log(url, option);
+
+	return await fetch(url, option).then(res => res).catch(error => {
+		console.log("error: ", error);
+	})
+}
+
+const getRoom = async() => {
+	const option = {
+		method: 'GET', // *GET, POST, PUT, DELETE, etc.
+		mode: 'cors', // no-cors, *cors, same-origin
+		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+		credentials: 'same-origin', // include, *same-origin, omit
+		headers: {
+			'Content-Type': 'application/json'
+			// 'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	}
+
+	const url = config.serverUrl + "room&roomId=" + readCookie("roomId");
+	console.log(url, option);
+
+	return await fetch(url, option).then(res => res).catch(error => {
+		console.log("error: ", error);
+	})
+}
+
+const init = () =>{
+	config.user = await getUser();
+	config.room = await getRoom();
+	connectRoom(config.room.id);
+};

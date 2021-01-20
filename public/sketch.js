@@ -43,6 +43,8 @@ class Screen{
 			let moveAngle = (Math.atan2(moveY,moveX) * (180 / Math.PI) + 90 + 360) % 360;
 			this.stage.setMyAvatar(mouseX,mouseY,moveAngle);
 
+			sendPosture(mouseX, mouseY, moveAngle, config.room.id, config.user.id);
+
 			this.user = {...this.user, x: mouseX, y: mouseY ,angle: moveAngle}
 		}else if(mouseButton === RIGHT){
 			this.contextMenu.setVisible(true);
@@ -54,6 +56,13 @@ class Screen{
 		this.stage.setAvatars(otheruser);
 	}
 	draw(){
+
+		if(config.tick % 1500 === 0){
+			const reload = async() =>{
+				getPosture().then(res => this.setData);
+			}
+			reload();
+		}
 
 		clear();
 		this.menu.draw();

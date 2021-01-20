@@ -14,7 +14,7 @@ var userData = {};
 router.get('/', (req, res, next) => {
     db.Room.findAll(
       {
-        where: {id: req.body.roomId}
+        where: {id: req.query.roomId}
       }
     ).then(usrs => {
       res.json(usrs);
