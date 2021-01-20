@@ -1,5 +1,4 @@
 $(function(){
-
 	let localStream = null;
 	let peer = null;
 	let existingCall = null;
@@ -167,5 +166,4 @@ function sendPosture(x, y, angle, roomId, userId){
 	}).catch(error => {
 		console.log("error: ", error);
 	})
-
 }
