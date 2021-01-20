@@ -22,9 +22,9 @@ router.post("/", (req, res) =>{
 		}
 	).then(dataCount => {
 			if(dataCount > 0)
-				res.sendStatus(200).send("OK");
+				res.sendStatus(200);
 			else
-				res.sendStatus(500).send("Not found");
+				res.status(500).send("Not found");
 	});
 });
 

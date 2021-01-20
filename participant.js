@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
     {x: req.body.x, y: req.body.y, angle: req.body.angle},
     {where: {roomId: req.body.roomId, userId: req.body.userId}}
   ).then(() => {})
-  res.sendStatus(200).send("OK");
+  res.sendStatus(200)
 });
 
 router.get('/', (req, res, next) => {
