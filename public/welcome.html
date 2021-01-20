@@ -3,107 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<title>Welcome - Gayelette</title>
-	<style>
-		:root{
-			--primary-color: #626d71;
-			--primary-variant: #cdcdc0;
-			--secondary-color: #ddbc95;
-			--secondary-variant: #b38867;
-			--font-color: #ffffff;
-		}
-		html, body{
-			width: 100%;
-			height: 100%;
-			position: relative;
-			background-color: var(--primary-variant);
-		}
-		.wrapper{
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background-color: var(--primary-color);
-			width: 600px;
-			height: 400px;
-			margin: auto;
-			padding: 20px 5px 5px 5px;
-			box-shadow: 0px 0px 0px #999999;
-		}
-		.title{
-			padding: 50px auto;
-			font-size: 25px;
-			font-weight: 700;
-			text-align: center;
-			color: var(--font-color);
-		}
-		.input-group{
-			width: 70%;
-			margin: 30px auto;
-		}
-		.input-group-text{
-			font-size: 15px;
-			color: var(--primary-variant);
-		}
-		.input-group-form{
-			box-sizing: border-box;
-			width: 100%;
-			height: 40px;
-		}
-		.button-container{
-			margin: auto;
-			width: 70%;
-			height: 35px;
-		}
-		.button{
-			background-color: var(--secondary-variant);
-			color: var(--font-color);
-			width: 100%;
-			height: 100%;
-			border: none;
-			cursor: pointer;
-		}
-	</style>
-	<script>
-
-		const domain = "https://localhost:3001/";
-
-		function onResister(){
-			const mail = $("#input-mail").val();
-			const username = $("#input-username").val();
-			const password = $("#input-password").val();
-
-			const option = {
-				method: 'POST', // *GET, POST, PUT, DELETE, etc.
-		    mode: 'cors', // no-cors, *cors, same-origin
-		    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-		    credentials: 'same-origin', // include, *same-origin, omit
-		    headers: {
-		      'Content-Type': 'application/json'
-		      // 'Content-Type': 'application/x-www-form-urlencoded',
-		    },
-				body: JSON.stringify({
-					mail: mail,
-					username: username,
-					password: password
-				})
-			}
-
-			const url = domain + "user";
-			console.log(url, option);
-
-			fetch(url, option).then(res =>{
-				console.log("complete!!");
-			}).catch(error => {
-				console.log("error: ", error);
-			})
-		}
-	</script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <title>Welcome - Gayelette</title>
+	<link rel="stylesheet" href="welcome.css">
+	<script src="welcome.js" defer></script>
 </head>
 <body>
-	<div class="wrapper">
+	<div id="wrapperResister" class="wrapper wrapper-resister">
 		<div class="title">Gayeletteアカウント作成</div>
 		<div class="input-group">
 			<div class="input-group-text">メールアドレス</div>
@@ -121,6 +28,33 @@
 			<button class="button" onclick="onResister()">
 				作成！！
 			</button>
+		</div>
+		<div class="bottom-text-container">
+			<div class="bottom-text">
+				<a onclick="onChangePage('login')">既にアカウントをお持ちですか？</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="wrapperLogin" class="wrapper wrapper-login">
+		<div class="title">Gayelette</div>
+		<div class="input-group">
+			<div class="input-group-text">メールアドレス</div>
+			<input type="text" id="input-mail" class="input-group-form" />
+		</div>
+		<div class="input-group">
+			<div class="input-group-text">パスワード</div>
+			<input type="password" id="input-password" class="input-group-form" />
+		</div>
+		<div class="button-container">
+			<button class="button" onclick="onResister()">
+				ログイン
+			</button>
+		</div>
+		<div class="bottom-text-container">
+			<div class="bottom-text">
+				<a onclick="onChangePage('resister')">アカウントを作成しますか？</a>
+			</div>
 		</div>
 	</div>
 </body>

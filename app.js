@@ -10,7 +10,6 @@ const userRouter = require("./user.js");
 const port1 = 3000;
 const port2 = 3001;
 
-// const PATH = "D:/github/gayelette-server";
 //const PATH = "C:/Users/S.Kite/Documents/Github/gayelette";
 const PATH = "D:/github/gayelette";
 

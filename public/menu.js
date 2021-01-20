@@ -2,32 +2,53 @@ function easeInOutQuad(x) {
 	return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
 }
 
-class Touchable{
-
-	onClick = null;
-
-	_prevMouseIsPressed = false;
-
-	_shouldEventExecute(){
-		if(!this._prevMouseIsPressed && mouseIsPressed && this.isClicked(mouseX, mouseY))
-			this.onClick && this.onClick();
-		this._prevMouseIsPressed = mouseIsPressed;
+function checkMenuItemDiff(newObject, oldObject, instance) {
+	var check = [];
+	for (let j = 0; j < newObject.length; j++) {
+		let flag = false;
+		for (let i = 0; i < oldObject.length; i++) {
+			//idが同じだったら
+			if (oldObject[i].id == newObject[j].id) {
+				for (let k = 0; k < oldObject.length; k++) {
+					if (oldObject[i].id == instance[k].id) {
+						instance[k].name = newObject[j].name;
+					}
+				}
+				flag = true;
+			}
+		}
+		if (flag == false) {
+			instance.push(new MenuItem({
+				...newObject[j],
+				width: 200,
+				height: 50
+			}));
+		}
 	}
 
-	isClicked(x, y){
-		return false;
-	};
+	for (let i = 0; i < oldObject.length; i++) {
+		let flag = false;
+		for (let j = 0; j < newObject.length; j++) {
+			if (oldObject[i].id == newObject[j].id) {
+				flag = true;
+			}
 
-	setClickHandler(event){
-		this.onClick = event;
-	}
 
-	draw(){
-		this._shouldEventExecute();
+		}
+		if (flag == false) {
+			for (let k = 0; k < instance.length; k++) {
+				if (oldObject[i].id == instance[k].id) {
+					instance.splice(k, 1);
+					break;
+				}
+			}
+		}
 	}
+	return instance;
 }
 
-class MenuItem extends Touchable{
+class MenuItem extends Touchable {
+	id = "";
 	x = 100;
 	y = 100;
 	width = 100;
@@ -38,7 +59,10 @@ class MenuItem extends Touchable{
 	img = null;
 	color = "#000000";
 
+	oldMenu = [];
+
 	constructor({
+		id,
 		x,
 		y,
 		width,
@@ -47,8 +71,9 @@ class MenuItem extends Touchable{
 		icon,
 		color,
 		onClick
-	}){
+	}) {
 		super();
+		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -58,112 +83,117 @@ class MenuItem extends Touchable{
 		this.color = color;
 		this.onClick = onClick;
 
-		if(icon) this.img = loadImage(icon)
+		if (icon) this.img = loadImage(icon)
 	}
 
-	isClicked(mouseX, mouseY){
+	isHover(mouseX, mouseY) {
 		const fragX = this.x < mouseX && mouseX < this.x + this.width;
 		const fragY = this.y < mouseY && mouseY < this.y + this.height;
 		return fragX && fragY;
 	}
 
-	setPosition(x, y){
+	setPosition(x, y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	draw(){
+	draw() {
 		super.draw();
+		var primaryColor = '#505160';
+		var primaryVariant = '#68828e';
+		var secondaryColor = '#aebd38';
+		var secondaryVariant = '#598234';
+		var fontColor = '#ffffff';
+		//fill(primaryVariant);
 
 		const padding = 5;
 		const r2 = this.height - padding * 2;
 		const fontSize = 10;
-
 		ellipse(this.x + r2 / 2 + padding, this.y + r2 / 2 + padding, r2, r2);
+		push();
+		fill(fontColor);
 		text(this.name, this.x + r2 + padding * 4, this.y + this.height / 2 + fontSize / 2);
+		pop();
 		this.img && image(this.img, this.x + padding, this.y + padding, r2, r2);
 	}
 }
 
-class MenuList{
+class MenuList {
 	mx = 100;
 	my = 100;
 
 	x = 100;
 	y = 100;
 	width = 300;
-	height = 300;
+	height = windowHeight;
 
 	isOpen = false;
 	frameRate = 50;
 	f = 50;
 
 	items = [];
-	constructor(x, y, onClick){
+	oldItems = [];
+
+	constructor(x, y, onClick) {
 		this.x = x;
 		this.y = y;
 		this.mx = x;
 		this.my = y;
 
-		this.items = [
-			new MenuItem({
-				x: 100,
-				y: 100,
-				width: 200,
-				height: 50,
-				icon: "",
-				name: "Kaito"
-			}),
-			new MenuItem({
-				x: 100,
-				y: 100,
-				width: 200,
-				height: 50,
-				icon: "",
-				name: "Shimizu"
-			})
-		];
+		this.items = [];
 	}
 
-	open(){
-		if(this.isOpen || this.f !== this.frameRate) return;
+	open() {
+		if (this.isOpen || this.f !== this.frameRate) return;
 		this.isOpen = true;
 		this.f = 0;
 	}
 
-	close(){
-		if(!this.isOpen || this.f !== this.frameRate) return;
+	close() {
+		if (!this.isOpen || this.f !== this.frameRate) return;
 		this.isOpen = false;
 		this.f = 0;
 	}
 
-	handleClickItem(item){
+	handleClickItem(item) {
 		console.log(item.name);
 	}
 
-	draw(){
-
+	draw() {
+		var primaryColor = '#505160';
+		var primaryVariant = '#68828e';
+		var secondaryColor = '#aebd38';
+		var secondaryVariant = '#598234';
+		background(primaryColor);
 		const paddingItems = 15;
 		const iconSize = 50;
 
-		if(this.isOpen && this.f != this.frameRate){
+		if (this.isOpen && this.f != this.frameRate) {
 			this.mx = this.x + (this.width - iconSize) * easeInOutQuad(this.f / this.frameRate);
 			this.f += 1;
 		}
-		if(!this.isOpen && this.f != this.frameRate){
+		if (!this.isOpen && this.f != this.frameRate) {
 			this.mx = (this.x + this.width - iconSize) - (this.width - iconSize) * easeInOutQuad(this.f / this.frameRate);
 			this.f += 1;
 		}
-		
+		push();
+		fill(primaryVariant);
 		rect(this.mx, this.my, this.width, this.height);
-		this.items.forEach((item, i) =>{
+		this.items.forEach((item, i) => {
 			item.setPosition(this.mx, this.my + (item.height + paddingItems) * i);
-			item.setClickHandler(() =>{
-				if(this.isOpen) this.close()
+			item.setClickHandler(() => {
+				if (this.isOpen) this.close()
 				else this.open()
 				this.handleClickItem(item)
 			})
 			item.draw();
 		})
+		pop();
+	}
+	setMenuData(items) {
+		this.items = checkMenuItemDiff(items, this.oldItems, this.items);
+		//this.screen.setMenu(items);
+		console.log(this.items);
+		this.oldItems = items;
 	}
 }
