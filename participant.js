@@ -14,7 +14,7 @@ var usrPar = {};
 
 
 router.post('/', (req, res) => {
-  db.User.count(
+  db.RoomParticipant.count(
 		{
 			where: {roomId: req.body.roomId, userId: req.body.userId}
 		}
