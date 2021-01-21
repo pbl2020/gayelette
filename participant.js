@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
 	).then(dataCount => {
     if(dataCount > 0){
       db.RoomParticipant.update(
-        {x: req.body.x, y: req.body.y, angle: req.body.angle, skywayId: req.body.skywayId},
+        {x: req.body.x, y: req.body.y, angle: req.body.angle, time: Date.now(), skywayId: req.body.skywayId},
         {where: {roomId: req.body.roomId, userId: req.body.userId}}
       ).then(() => {})
       res.sendStatus(200);
@@ -30,9 +30,12 @@ router.post('/', (req, res) => {
       db.RoomParticipant.create({
         roomId: req.body.roomId,
         userId: req.body.userId,
+        username: req.body.username,
+        role: req.body.role,
         x: req.body.x,
         y: req.body.y,
         angle: req.body.angle,
+        time: Date.now(),
         skywayId: req.body.skywayId
       }).then(() => {})
       res.sendStatus(200);
