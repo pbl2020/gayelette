@@ -45,7 +45,7 @@ router.get('/', (req, res, next) => {
   db.RoomParticipant.findAll(
     {
       attribute: ['userId', 'x', 'y', 'angle', 'skywayId'],
-      where: {roomId: req.body.roomId,skywayId,time:{[Op.gte]: t}}
+      where: {roomId: req.query.roomId,time:{[Op.gte]: t}}
     }
   ).then(usrs => {
     res.json(usrs);
