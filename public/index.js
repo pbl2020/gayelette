@@ -61,6 +61,7 @@ function connectRoom(roomId){
 			audio: {deviceId: {exact: audioSource}},
 			video: {deviceId: {exact: videoSource}}
 		};
+		/*
 		constraints.video.width = {
 			min: 320,
 			max: 320
@@ -69,7 +70,7 @@ function connectRoom(roomId){
 			min: 240,
 			max: 240
 		};
-
+*/
 		if(localStream){
 			localStream = null;
 		}
@@ -238,6 +239,6 @@ const getRoom = async() => {
 const init = async() =>{
 	config.user = (await getUser())[0];
 	config.room = (await getRoom())[0];
-	connectRoom(config.room.id);
+	connectRoom(config.room.skywayKey);
 };
 init();
