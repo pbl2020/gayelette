@@ -16,13 +16,13 @@ var usrPar = {};
 router.post('/', (req, res) => {
   db.RoomParticipant.count(
 		{
-			where: {roomId: req.body.roomId, userId: req.body.userId, skywayId: req.body.skywayId}
+			where: {roomId: req.body.roomId, userId: req.body.userId,}
 		}
 	).then(dataCount => {
     if(dataCount > 0){
       db.RoomParticipant.update(
-        {x: req.body.x, y: req.body.y, angle: req.body.angle},
-        {where: {roomId: req.body.roomId, userId: req.body.userId, skywayId: req.body.skywayId}}
+        {x: req.body.x, y: req.body.y, angle: req.body.angle, skywayId: req.body.skywayId},
+        {where: {roomId: req.body.roomId, userId: req.body.userId}}
       ).then(() => {})
       res.sendStatus(200);
     }
