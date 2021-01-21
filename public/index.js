@@ -143,9 +143,10 @@ function connectRoom(roomId){
 }
 
 function readCookie(key) {
-	var tmp = document.cookie;
-	var reg = new RegExp("/(?:(?:^|.*;\s*)" + key + "\\s*\=\s*([^;]*).*$)|^.*$/")
-	var cookieValue = document.cookie.replace(reg, "$1");
+	const cookieValue = document.cookie
+	.split('; ')
+	.find(row => row.startsWith(key))
+	.split('=')[1];
 	return cookieValue;
 }
 
@@ -174,7 +175,7 @@ const sendPosture = async(x, y, angle, roomId, userId) =>{
 	})
 }
 
-const getPosture = async(x, y, angle, roomId, userId) =>{
+const getPosture = async(roomId) =>{
 	const option = {
 		method: 'GET', // *GET, POST, PUT, DELETE, etc.
 		mode: 'cors', // no-cors, *cors, same-origin
@@ -186,10 +187,10 @@ const getPosture = async(x, y, angle, roomId, userId) =>{
 		},
 	}
 
-	const url = config.serverUrl + "participant";
+	const url = config.serverUrl + "participant?roomId=" + roomId;
 	console.log(url, option);
 
-	return await fetch(url, option).then(res => res).catch(error => {
+	return await fetch(url, option).then(res => res.json()).catch(error => {
 		console.log("error: ", error);
 	})
 }
@@ -206,10 +207,10 @@ const getUser = async () => {
 		},
 	}
 
-	const url = config.serverUrl + "user&userId=" + readCookie("userId");
+	const url = config.serverUrl + "user?userId=" + readCookie("userId");
 	console.log(url, option);
 
-	return await fetch(url, option).then(res => res).catch(error => {
+	return await fetch(url, option).then(res => res.json()).catch(error => {
 		console.log("error: ", error);
 	})
 }
@@ -226,16 +227,17 @@ const getRoom = async() => {
 		},
 	}
 
-	const url = config.serverUrl + "room&roomId=" + readCookie("roomId");
+	const url = config.serverUrl + "room?roomId=" + readCookie("roomId");
 	console.log(url, option);
 
-	return await fetch(url, option).then(res => res).catch(error => {
+	return await fetch(url, option).then(res => res.json()).catch(error => {
 		console.log("error: ", error);
 	})
 }
 
-const init = () =>{
-	config.user = await getUser();
-	config.room = await getRoom();
+const init = async() =>{
+	config.user = (await getUser())[0];
+	config.room = (await getRoom())[0];
 	connectRoom(config.room.id);
 };
+init();

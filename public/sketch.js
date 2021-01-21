@@ -59,7 +59,7 @@ class Screen{
 
 		if(config.tick % 1500 === 0){
 			const reload = async() =>{
-				getPosture().then(res => this.setData);
+				getPosture(config.room.id).then(res => this.setData);
 			}
 			reload();
 		}
@@ -76,6 +76,7 @@ var screen;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	screen = new Screen();
+	console.log(config);
 }
 function draw(){
 	config.tick += 1;

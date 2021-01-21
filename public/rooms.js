@@ -6,9 +6,10 @@ function writeCookie(key, value) {
 
 // 読み込み
 function readCookie(key) {
-	var tmp = document.cookie;
-	var reg = new RegExp("/(?:(?:^|.*;\s*)" + key + "\\s*\=\s*([^;]*).*$)|^.*$/")
-	var cookieValue = document.cookie.replace(reg, "$1");
+	const cookieValue = document.cookie
+  .split('; ')
+  .find(row => row.startsWith(key))
+  .split('=')[1];
 	return cookieValue;
 }
 
