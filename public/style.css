@@ -93,7 +93,7 @@ video {
 	background: blue;
 	float: right;
 }
-/*
+
 .videosContainer video {
 	height: 100%;
 }
@@ -137,4 +137,4 @@ video {
 .videosContainer video:first-child:nth-last-child(8) ~ video {
 	width: 12.5%;
 }
-*/
+
