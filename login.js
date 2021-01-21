@@ -22,7 +22,12 @@ router.post("/", (req, res) =>{
 		}
 	).then(dataCount => {
 			if(dataCount > 0)
-				res.sendStatus(200);
+				db.User.findAll({
+					attribute: ['userId'],
+					where: {mail: mail, pass: pass}
+				}).then(usrs => {
+					res.status(200).json(usrs);
+				});
 			else
 				res.status(500).send("Not found");
 	});

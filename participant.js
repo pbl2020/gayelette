@@ -14,11 +14,29 @@ var usrPar = {};
 
 
 router.post('/', (req, res) => {
-  db.RoomParticipant.update(
-    {x: req.body.x, y: req.body.y, angle: req.body.angle},
-    {where: {roomId: req.body.roomId, userId: req.body.userId}}
-  ).then(() => {})
-  res.sendStatus(200)
+  db.User.count(
+		{
+			where: {roomId: req.body.roomId, userId: req.body.userId}
+		}
+	).then(dataCount => {
+    if(dataCount > 0){
+      db.RoomParticipant.update(
+        {x: req.body.x, y: req.body.y, angle: req.body.angle},
+        {where: {roomId: req.body.roomId, userId: req.body.userId}}
+      ).then(() => {})
+      res.sendStatus(200);
+    }
+    else{
+      db.RoomParticipant.create({
+        roomId: req.body.roomId,
+        userId: req.body.userId,
+        x: req.body.x,
+        y: req.body.y,
+        angle: req.body.angle
+      }).then(() => {})
+      res.sendStatus(200);
+    }
+  });
 });
 
 router.get('/', (req, res, next) => {
