@@ -13,7 +13,7 @@ router.post("/", (req, res) =>{
 	const {mail, pass} = req.body;
 
 	// ここに 「mail, pass が一致するユーザが存在するか？」
-	// 「存在するならば 200 を返す」
+	// 「存在するならば 200 とユーザIdを返す」
 	// 「存在しないならば 500 を返す」
 	// 処理を書く
 	db.User.count(
