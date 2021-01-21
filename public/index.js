@@ -35,6 +35,7 @@ function initRoom(){
 
 	peer.on('open', function(){
 		$('#my-id').text(peer.id);
+		config.skywayId = peer.id;
 	});
 
 	peer.on('error', function(err){
@@ -173,7 +174,7 @@ const sendPosture = async(x, y, angle, roomId, userId) =>{
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		body: JSON.stringify({
-			x, y, angle, roomId, userId
+			x, y, angle, roomId, userId, skywayId: config.skywayId
 		})
 	}
 
