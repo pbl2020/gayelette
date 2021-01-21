@@ -70,8 +70,8 @@ function onResister(){
 }
 
 function onLogin(){
-	const mail = $("#input-mail").val();
-	const password = $("#input-password").val();
+	const mail = $("#input-mail-login").val();
+	const password = $("#input-password-login").val();
 
 	const option = {
 		method: 'POST', // *GET, POST, PUT, DELETE, etc.
