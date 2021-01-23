@@ -162,7 +162,7 @@ function readCookie(key) {
 	return cookieValue;
 }
 
-const sendPosture = async(x, y, angle, roomId, userId) =>{
+const sendPosture = async(x, y, angle, role = "", roomId, userId) =>{
 	console.log(roomId, userId);
 	const option = {
 		method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -174,7 +174,7 @@ const sendPosture = async(x, y, angle, roomId, userId) =>{
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		body: JSON.stringify({
-			x, y, angle, roomId, userId, skywayId: config.skywayId
+			x, y, angle, roomId, userId, role, skywayId: config.skywayId
 		})
 	}
 
