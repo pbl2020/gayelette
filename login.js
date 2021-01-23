@@ -22,8 +22,7 @@ router.post("/", (req, res) =>{
 		}
 	).then(dataCount => {
 			if(dataCount > 0)
-				db.User.findAll({
-					attribute: ['userId'],
+				db.User.findOne({
 					where: {mail: mail, pass: pass}
 				}).then(usrs => {
 					res.status(200).json(usrs);
