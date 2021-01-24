@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const http = require("http")
 const https = require('https');
+const cors = require('cors')
 const app = express();
 
 const userRouter = require("./user.js");
@@ -17,6 +18,7 @@ const port2 = 3001;
 // const PATH = "C:/Users/S.Kite/Documents/Github/gayelette";
 const PATH = "/Users/ok/Documents/GitHub/gayelette";
 
+app.use(cors())
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
