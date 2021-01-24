@@ -43,7 +43,7 @@ class Screen{
 			let moveAngle = (Math.atan2(moveY,moveX) * (180 / Math.PI) + 90 + 360) % 360;
 			this.stage.setMyAvatar(mouseX,mouseY,moveAngle);
 
-			sendPosture(mouseX, mouseY, moveAngle, config.room.id, config.user.id);
+			sendPosture(mouseX, mouseY, moveAngle);
 
 			this.user = {...this.user, x: mouseX, y: mouseY ,angle: moveAngle}
 		}else if(mouseButton === RIGHT){
@@ -52,16 +52,17 @@ class Screen{
 		}
 	}
 	setData(otheruser){
+		console.log(otheruser);
 		this.otheruser = otheruser;
 		this.stage.setAvatars(otheruser);
 	}
 	draw(){
 
-		if(config.tick % 1500 === 0){
-			const reload = async() =>{
-				getPosture(config.room.id).then(res => this.setData);
-			}
-			reload();
+		if(config.tick % 150 === 0){
+			getPosture(config.room.id).then(res => {
+				const user = res.filter(user => user.userId !== config.user.id);
+				this.setData(user)
+			});
 		}
 
 		clear();
@@ -76,7 +77,6 @@ var screen;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	screen = new Screen();
-	console.log(config);
 }
 function draw(){
 	config.tick += 1;

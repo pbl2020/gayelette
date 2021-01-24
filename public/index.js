@@ -163,7 +163,6 @@ function readCookie(key) {
 }
 
 const sendPosture = async(x, y, angle, role = "", roomId, userId) =>{
-	console.log(roomId, userId);
 	const option = {
 		method: 'POST', // *GET, POST, PUT, DELETE, etc.
 		mode: 'cors', // no-cors, *cors, same-origin
@@ -174,12 +173,16 @@ const sendPosture = async(x, y, angle, role = "", roomId, userId) =>{
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		body: JSON.stringify({
-			x, y, angle, roomId, userId, role, skywayId: config.skywayId
+			x, y, angle, 
+			role, 
+			roomId: config.room.id, 
+			userId: config.user.id, 
+			skywayId: config.skywayId
 		})
 	}
 
 	const url = config.serverUrl + "participant";
-	console.log(url, option);
+	console.log(url);
 
 	fetch(url, option).then(res =>{
 	}).catch(error => {
@@ -200,11 +203,9 @@ const getPosture = async(roomId) =>{
 	}
 
 	const url = config.serverUrl + "participant?roomId=" + roomId;
-	console.log(url, option);
+	console.log(url);
 
-	return await fetch(url, option).then(res => res.json()).catch(error => {
-		console.log("error: ", error);
-	})
+	return fetch(url, option).then(res => res.json());
 }
 
 const getUser = async () => {
@@ -220,7 +221,7 @@ const getUser = async () => {
 	}
 
 	const url = config.serverUrl + "user?userId=" + readCookie("userId");
-	console.log(url, option);
+	console.log(url);
 
 	return await fetch(url, option).then(res => res.json()).catch(error => {
 		console.log("error: ", error);
@@ -240,7 +241,7 @@ const getRoom = async() => {
 	}
 
 	const url = config.serverUrl + "room?roomId=" + readCookie("roomId");
-	console.log(url, option);
+	console.log(url);
 
 	return await fetch(url, option).then(res => res.json()).catch(error => {
 		console.log("error: ", error);
