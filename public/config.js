@@ -1,6 +1,9 @@
 const config = {
 	startTime: Date.now(),
-	userId: "",
-	roomId: "",
-	tick: 0
+	user: {},
+	room: {},
+	tick: 0,
+	skywayId: "",
+
+	serverUrl: "https://localhost:3001/"
 }

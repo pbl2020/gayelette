@@ -27,10 +27,13 @@ module.exports = (sequelize, DataTypes) => {
     x: DataTypes.INTEGER,
     y: DataTypes.INTEGER,
     angle: DataTypes.INTEGER,
-    time: DataTypes.INTEGER
+    time: DataTypes.INTEGER,
+    skywayId: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'RoomParticipant',
+    freezeTableName: true,
+    timestamps: false
   });
   return RoomParticipant;
 };

@@ -15,23 +15,7 @@ class Screen{
 		size: 30,
 		angle: 0
 	};
-	otheruser = [{
-			name: "shimizu",
-			id: "0312018087",
-			x: 150,
-			y: 250,
-			size: 30,
-			angle: 90
-		},
-		{
-			name: "masuda",
-			id: "0312018088",
-			x: 200,
-			y: 300,
-			size: 30,
-			angle: 45
-		}
-	]
+	otheruser = []
 
 	constructor(){
 		this.menu = new MenuList(windowWidth - 300, 0);
@@ -48,36 +32,6 @@ class Screen{
 		}]);
 		this.stage.setClick(this.handleClick.bind(this));
 		this.setData(this.otheruser);
-		setTimeout(()=>{
-			this.setData( [
-				{
-					name: "shimizu",
-					id: "0312018087",
-					x: 400, 
-					y: 400,
-					size: 30,
-					angle: 90
-				},
-				{
-					name: "koyama",
-					id: "0312018062",
-					x: 100,
-					y: 100,
-					size: 30,
-					angle: 90
-				},
-				{
-					name: "oota",
-					id: "0312018063",
-					x: 300,
-					y: 100,
-					size: 30,
-					angle: 90
-				}
-			])
-		},5000);
-
-
 	}
 	handleClick(){
 		this.contextMenu.setVisible(false);
@@ -89,6 +43,8 @@ class Screen{
 			let moveAngle = (Math.atan2(moveY,moveX) * (180 / Math.PI) + 90 + 360) % 360;
 			this.stage.setMyAvatar(mouseX,mouseY,moveAngle);
 
+			sendPosture(mouseX, mouseY, moveAngle);
+
 			this.user = {...this.user, x: mouseX, y: mouseY ,angle: moveAngle}
 		}else if(mouseButton === RIGHT){
 			this.contextMenu.setVisible(true);
@@ -96,10 +52,18 @@ class Screen{
 		}
 	}
 	setData(otheruser){
+		console.log(otheruser);
 		this.otheruser = otheruser;
 		this.stage.setAvatars(otheruser);
 	}
 	draw(){
+
+		if(config.tick % 150 === 0){
+			getPosture(config.room.id).then(res => {
+				const user = res.filter(user => user.userId !== config.user.id);
+				this.setData(user)
+			});
+		}
 
 		clear();
 		this.menu.draw();

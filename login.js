@@ -13,10 +13,23 @@ router.post("/", (req, res) =>{
 	const {mail, pass} = req.body;
 
 	// ここに 「mail, pass が一致するユーザが存在するか？」
-	// 「存在するならば 200 を返す」
+	// 「存在するならば 200 とユーザIdを返す」
 	// 「存在しないならば 500 を返す」
 	// 処理を書く
-
-})
+	db.User.count(
+		{
+			where: {mail: mail, pass: pass}
+		}
+	).then(dataCount => {
+			if(dataCount > 0)
+				db.User.findOne({
+					where: {mail: mail, pass: pass}
+				}).then(usrs => {
+					res.status(200).json(usrs);
+				});
+			else
+				res.status(500).send("Not found");
+	});
+});
 
 module.exports = router;

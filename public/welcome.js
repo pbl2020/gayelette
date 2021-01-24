@@ -30,9 +30,10 @@ function writeCookie(key, value) {
 
 // 読み込み
 function readCookie(key) {
-	var tmp = document.cookie;
-	var reg = new RegExp("/(?:(?:^|.*;\s*)" + key + "\\s*\=\s*([^;]*).*$)|^.*$/")
-	var cookieValue = document.cookie.replace(reg, "$1");
+	const cookieValue = document.cookie
+  .split('; ')
+  .find(row => row.startsWith(key))
+  .split('=')[1];
 	return cookieValue;
 }
 
@@ -60,17 +61,18 @@ function onResister(){
 	const url = domain + "user";
 	console.log(url, option);
 
-	fetch(url, option).then(res =>{
-		writeCookie("userId", res.body.id);
+	fetch(url, option).then(res => res.json()).then(json =>{
+		console.log(json);
+		writeCookie("userId", json.id);
 		window.location.href = "rooms.html";
 	}).catch(error => {
 		console.log("error: ", error);
 	})
 }
 
-function onResister(){
-	const mail = $("#input-mail").val();
-	const password = $("#input-password").val();
+function onLogin(){
+	const mail = $("#input-mail-login").val();
+	const password = $("#input-password-login").val();
 
 	const option = {
 		method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -90,8 +92,8 @@ function onResister(){
 	const url = domain + "login";
 	console.log(url, option);
 
-	fetch(url, option).then(res =>{
-		writeCookie("userId", res.body.id);
+	fetch(url, option).then(res => res.json()).then(json =>{
+		writeCookie("userId", json.id);
 		window.location.href = "rooms.html";
 	}).catch(error => {
 		console.log("error: ", error);

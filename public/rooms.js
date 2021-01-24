@@ -1,12 +1,15 @@
+const domain = "https://localhost:3001/";
+
 function writeCookie(key, value) {
 	document.cookie = key + "=" + value;
 }
 
 // 読み込み
 function readCookie(key) {
-	var tmp = document.cookie;
-	var reg = new RegExp("/(?:(?:^|.*;\s*)" + key + "\\s*\=\s*([^;]*).*$)|^.*$/")
-	var cookieValue = document.cookie.replace(reg, "$1");
+	const cookieValue = document.cookie
+  .split('; ')
+  .find(row => row.startsWith(key))
+  .split('=')[1];
 	return cookieValue;
 }
 
@@ -45,6 +48,7 @@ function renderRoom(){
 
 function onJoinRoom(id){
 	writeCookie("roomId", id);
+	window.location.href = domain + "index.html";
 }
 
 function createRoomTag(room){
@@ -56,7 +60,7 @@ function createRoomTag(room){
 			<div class="room-members">
 			</div>
 			<div class="button-container">
-				<button class="button" onclick="onResister()">
+				<button class="button" onclick="onJoinRoom('${room.id}')">
 					JOIN!!
 				</button>
 			</div>
