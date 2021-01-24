@@ -12,11 +12,10 @@ router.use(express.json());
 
 var usrPar = {};
 
-
 router.post('/', (req, res) => {
   db.RoomParticipant.count(
 		{
-			where: {roomId: req.body.roomId, userId: req.body.userId,}
+			where: {roomId: roomId, userId: userId}
 		}
 	).then(dataCount => {
     if(dataCount > 0){
