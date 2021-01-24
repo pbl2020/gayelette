@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
       db.RoomParticipant.create({
         roomId: req.body.roomId,
         userId: req.body.userId,
-        username: req.body.username,
+        username: req.body.username || "",
         role: req.body.role,
         x: req.body.x,
         y: req.body.y,
