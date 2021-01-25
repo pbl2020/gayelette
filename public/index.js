@@ -1,7 +1,8 @@
-function connectRoom(roomId){
-	let localStream = null;
-	let peer = null;
-	let existingCall = null;
+let peer = null;
+let localStream = null;
+let existingCall = null;
+
+function initRoom(){
 	let audioSelect = $('#audioSource');
 	let videoSelect = $('#videoSource');
 
@@ -34,6 +35,7 @@ function connectRoom(roomId){
 
 	peer.on('open', function(){
 		$('#my-id').text(peer.id);
+		config.skywayId = peer.id;
 	});
 
 	peer.on('error', function(err){
@@ -53,24 +55,40 @@ function connectRoom(roomId){
 	$('#end-call').click(function(){
 		existingCall.close();
 	});
+}
+	
+function addVideo(stream){
+	const videoDom = $('<video autoplay>');
+	videoDom.attr('id',stream.peerId);
+	videoDom.get(0).srcObject = stream;
+	$('.videosContainer').append(videoDom);
+}
 
-	function setupGetUserMedia() {
+function removeVideo(peerId){
+	$('#'+peerId).remove();
+}
+
+function removeAllRemoteVideos(){
+	$('.videosContainer').empty();
+}
+
+function setupMakeCallUI(){
+	$('#make-call').show();
+	$('#end-call').hide();
+}
+
+function setupEndCallUI() {
+	$('#make-call').hide();
+	$('#end-call').show();
+}
+
+function setupGetUserMedia() {
 		let audioSource = $('#audioSource').val();
 		let videoSource = $('#videoSource').val();
 		let constraints = {
 			audio: {deviceId: {exact: audioSource}},
 			video: {deviceId: {exact: videoSource}}
 		};
-		/*
-		constraints.video.width = {
-			min: 320,
-			max: 320
-		};
-		constraints.video.height = {
-			min: 240,
-			max: 240
-		};
-*/
 		if(localStream){
 			localStream = null;
 		}
@@ -90,57 +108,41 @@ function connectRoom(roomId){
 			});
 	}
 
-	function setupCallEventHandlers(call){
-		if (existingCall) {
-			existingCall.close();
-		};
 
-		existingCall = call;
-		setupEndCallUI();
-		$('#room-id').text(call.name);
+function setupCallEventHandlers(call){
+	if (existingCall) {
+		existingCall.close();
+	};
 
-		call.on('stream', function(stream){
-			addVideo(stream);
-		});
+	existingCall = call;
+	setupEndCallUI();
+	$('#room-id').text(call.name);
 
-		call.on('removeStream', function(stream){
-			removeVideo(stream.peerId);
-		});
+	call.on('stream', function(stream){
+		addVideo(stream);
+	});
 
-		call.on('peerLeave', function(peerId){
-			removeVideo(peerId);
-		});
+	call.on('removeStream', function(stream){
+		removeVideo(stream.peerId);
+	});
 
-		call.on('close', function(){
-			removeAllRemoteVideos();
-			setupMakeCallUI();
-		});
-	}
+	call.on('peerLeave', function(peerId){
+		removeVideo(peerId);
+	});
 
-	function addVideo(stream){
-		const videoDom = $('<video autoplay>');
-		videoDom.attr('id',stream.peerId);
-		videoDom.get(0).srcObject = stream;
-		$('.videosContainer').append(videoDom);
-	}
+	call.on('close', function(){
+		removeAllRemoteVideos();
+		setupMakeCallUI();
+	});
+}
 
-	function removeVideo(peerId){
-		$('#'+peerId).remove();
-	}
-
-	function removeAllRemoteVideos(){
-		$('.videosContainer').empty();
-	}
-
-	function setupMakeCallUI(){
-		$('#make-call').show();
-		$('#end-call').hide();
-	}
-
-	function setupEndCallUI() {
-		$('#make-call').hide();
-		$('#end-call').show();
-	}
+function connectRoom(){
+	let roomName = config.room.skywayKey;
+		if (!roomName) {
+			return;
+		}
+	const call = peer.joinRoom(roomName, {mode: 'sfu', stream: localStream});
+	setupCallEventHandlers(call);
 }
 
 function readCookie(key) {
@@ -151,8 +153,7 @@ function readCookie(key) {
 	return cookieValue;
 }
 
-const sendPosture = async(x, y, angle, roomId, userId) =>{
-	console.log(roomId, userId);
+const sendPosture = async(x, y, angle, role = "", roomId, userId) =>{
 	const option = {
 		method: 'POST', // *GET, POST, PUT, DELETE, etc.
 		mode: 'cors', // no-cors, *cors, same-origin
@@ -163,12 +164,16 @@ const sendPosture = async(x, y, angle, roomId, userId) =>{
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		body: JSON.stringify({
-			x, y, angle, roomId, userId
+			x, y, angle, 
+			role, 
+			roomId: config.room.id, 
+			userId: config.user.id, 
+			skywayId: config.skywayId
 		})
 	}
 
 	const url = config.serverUrl + "participant";
-	console.log(url, option);
+	console.log(url);
 
 	fetch(url, option).then(res =>{
 	}).catch(error => {
@@ -189,11 +194,9 @@ const getPosture = async(roomId) =>{
 	}
 
 	const url = config.serverUrl + "participant?roomId=" + roomId;
-	console.log(url, option);
+	console.log(url);
 
-	return await fetch(url, option).then(res => res.json()).catch(error => {
-		console.log("error: ", error);
-	})
+	return fetch(url, option).then(res => res.json());
 }
 
 const getUser = async () => {
@@ -209,7 +212,7 @@ const getUser = async () => {
 	}
 
 	const url = config.serverUrl + "user?userId=" + readCookie("userId");
-	console.log(url, option);
+	console.log(url);
 
 	return await fetch(url, option).then(res => res.json()).catch(error => {
 		console.log("error: ", error);
@@ -229,7 +232,7 @@ const getRoom = async() => {
 	}
 
 	const url = config.serverUrl + "room?roomId=" + readCookie("roomId");
-	console.log(url, option);
+	console.log(url);
 
 	return await fetch(url, option).then(res => res.json()).catch(error => {
 		console.log("error: ", error);
@@ -239,6 +242,9 @@ const getRoom = async() => {
 const init = async() =>{
 	config.user = (await getUser())[0];
 	config.room = (await getRoom())[0];
-	connectRoom(config.room.skywayKey);
+	initRoom();
+	setTimeout(() =>{
+		connectRoom(config.room.skywayKey);
+	}, 5000)
 };
 init();

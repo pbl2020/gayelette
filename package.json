@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/pbl2020/gayelette#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0",

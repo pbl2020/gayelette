@@ -93,7 +93,7 @@ function onLogin(){
 	console.log(url, option);
 
 	fetch(url, option).then(res => res.json()).then(json =>{
-		writeCookie("userId", res.id);
+		writeCookie("userId", json.id);
 		window.location.href = "rooms.html";
 	}).catch(error => {
 		console.log("error: ", error);
