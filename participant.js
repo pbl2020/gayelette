@@ -15,7 +15,7 @@ var usrPar = {};
 router.post('/', (req, res) => {
   db.RoomParticipant.count(
 		{
-			where: {roomId: roomId, userId: userId}
+			where: {roomId: req.body.roomId, userId: req.body.userId}
 		}
 	).then(dataCount => {
     if(dataCount > 0){
