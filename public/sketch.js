@@ -65,6 +65,13 @@ class Screen{
 			});
 		}
 
+		if(config.tick % 150 === 0){
+			this.otheruser.forEach(u =>{
+				const volume = calcVolume(this.user, u);
+				controlVolume(u.skywayId, volume);
+			})
+		}
+
 		clear();
 		this.menu.draw();
 		this.stage.draw();

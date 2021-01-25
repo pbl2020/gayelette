@@ -136,6 +136,16 @@ function setupCallEventHandlers(call){
 	});
 }
 
+const calcVolume = (user1, user2) =>{
+	const dx = user1.x - user2.x;
+	const dy = user1.y - user2.y;
+	const a = Math.atan2(dx, dy);
+	const x = Math.sqrt(dx * dx + dy * dy) / 20 - 5;
+	const res = 1 - (1 / (1 + Math.pow(Math.E, -x)))
+	console.log("atan2 =", a, ", range =", x, ", result = ", res);
+	return res;
+}
+
 function connectRoom(){
 	let roomName = config.room.skywayKey;
 		if (!roomName) {
