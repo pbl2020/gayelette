@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/', (req, res, next) => {
-  var t = Date.now() - 60000;
+  var t = Date.now() - 600000;
   db.RoomParticipant.findAll(
     {
       attribute: ['userId', 'x', 'y', 'angle', 'skywayId'],

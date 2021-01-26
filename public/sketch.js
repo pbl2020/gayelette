@@ -57,7 +57,6 @@ class Screen{
 		this.stage.setAvatars(otheruser);
 	}
 	draw(){
-
 		if(config.tick % 150 === 0){
 			getPosture(config.room.id).then(res => {
 				const user = res.filter(user => user.userId !== config.user.id);

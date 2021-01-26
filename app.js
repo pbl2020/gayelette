@@ -18,7 +18,7 @@ const PATH = "C:/Users/S.Kite/Documents/Github/gayelette";
 // const PATH = "D:/github/gayelette";
 // const PATH = "/Users/shimizutakumi/Documents/GitHub/gayelette"
 
-app.use(cors())
+app.use(cors());
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
