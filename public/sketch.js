@@ -64,7 +64,7 @@ class Screen{
 			});
 		}
 
-		if(config.tick % 150 === 0){
+		if(config.tick % 10 === 0){
 			this.otheruser.forEach(u =>{
 				const volume = calcVolume(this.user, u);
 				controlVolume(u.skywayId, volume);
