@@ -5,5 +5,5 @@ const config = {
 	tick: 0,
 	skywayId: "",
 
-	serverUrl: "https://" + window.location.host + "/"
+	serverUrl: "https://localhost:3001/"
 }
