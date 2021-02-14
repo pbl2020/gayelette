@@ -59,7 +59,7 @@ function onResister(){
 		})
 	}
 
-	const url = domain + "user";
+	const url = "user";
 	console.log(url, option);
 
 	fetch(url, option).then(res => res.json()).then(json =>{
@@ -91,7 +91,7 @@ function onLogin(){
 		})
 	}
 
-	const url = domain + "login";
+	const url = "login";
 	console.log(url, option);
 
 	fetch(url, option).then(res => res.json()).then(json =>{

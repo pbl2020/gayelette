@@ -5,5 +5,12 @@ const config = {
 	tick: 0,
 	skywayId: "",
 
-	serverUrl: "https://localhost:3001/"
+	serverUrl: "https://" + window.location.host + "/",
+	volumeAngle: [{
+		angle: 180,
+		len: 90
+	}, {
+		angle: 65,
+		len: 180
+	}]
 }

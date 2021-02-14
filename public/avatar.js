@@ -14,7 +14,7 @@ class Avatar{
 		this.x = x
 		this.y = y
 		this.size = size
-		this.angle = -angle
+		this.angle = angle
 	}
 	draw(){
 		push()
@@ -36,15 +36,27 @@ class Avatar{
 
 		fill(viewColor);
 		stroke(strokeColor);
-		ellipse(0,0,90,90);
-		fill("#505160");
-		arc(0, 0, 90, 90, radians(-135),radians(-45), PIE);
-		fill(viewColor);
-		arc(0, 0, 180, 180, radians(-135),radians(-45), PIE);
-		fill("#505160");
-		arc(0, 0, 180, 180, radians(-115),radians(-65), PIE);
-		fill(viewColor);
-		arc(0, 0, 230, 230, radians(-115),radians(-65), PIE);
+		// ellipse(0,0,90,90);
+		// fill("#505160");
+		// arc(0, 0, 90, 90, radians(-config.volumeAngle),radians(config.volumeAngle), PIE);
+		//fill(viewColor);
+		//arc(0, 0, 180, 180, radians(-65),radians(65), PIE);
+		//fill("#505160");
+		//arc(0, 0, 180, 180, radians(-65),radians(65), PIE);
+		// fill(viewColor);
+		// arc(0, 0, 230, 230, radians(-config.volumeAngle),radians(config.volumeAngle), PIE);
+
+		for(let i = 0; i < config.volumeAngle.length; i++){
+			fill(viewColor);
+			const volume = config.volumeAngle[i];
+			const nextVolume = config.volumeAngle[i + 1];
+			arc(0, 0, volume.len, volume.len, radians(-volume.angle),radians(volume.angle), PIE);
+			if(nextVolume){
+				fill("#505160")
+				arc(0, 0, volume.len, volume.len, radians(-nextVolume.angle),radians(nextVolume.angle), PIE);
+			}
+		}
+
 		fill(ellipseColor);
 		ellipse(0,0,this.size,this.size)
 

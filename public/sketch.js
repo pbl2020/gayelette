@@ -39,8 +39,7 @@ class Screen{
 		if(mouseButton === LEFT){
 			let moveX = mouseX - this.user.x;
 			let moveY = mouseY - this.user.y;
-			let hypo = Math.sqrt(Math.pow(moveX,2) + Math.pow(moveY,2));
-			let moveAngle = (Math.atan2(moveY,moveX) * (180 / Math.PI) + 90 + 360) % 360;
+			let moveAngle = (degrees(Math.atan2(moveY,moveX)) + 360) % 360;
 			this.stage.setMyAvatar(mouseX,mouseY,moveAngle);
 
 			sendPosture(mouseX, mouseY, moveAngle);
