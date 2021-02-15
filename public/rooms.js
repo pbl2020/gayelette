@@ -48,7 +48,7 @@ function renderRoom(){
 
 function onJoinRoom(id){
 	writeCookie("roomId", id);
-	window.location.href = domain + "index.html";
+	window.location.href = "index.html";
 }
 
 function createRoomTag(room){

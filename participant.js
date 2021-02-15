@@ -15,7 +15,7 @@ var usrPar = {};
 router.post('/', (req, res) => {
   db.RoomParticipant.count(
 		{
-			where: {roomId: roomId, userId: userId}
+			where: {roomId: req.body.roomId, userId: req.body.userId}
 		}
 	).then(dataCount => {
     if(dataCount > 0){
@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/', (req, res, next) => {
-  var t = Date.now() - 60000;
+  var t = Date.now() - 600000;
   db.RoomParticipant.findAll(
     {
       attribute: ['userId', 'x', 'y', 'angle', 'skywayId'],

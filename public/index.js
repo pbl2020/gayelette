@@ -29,7 +29,7 @@ function initRoom(){
 		});
 
 	peer = new Peer({
-		key: '10f66b8b-fbb8-449e-9492-a1871b23286e',
+		key: '04b37624-0465-443b-9a67-867469528255',
 		debug: 3
 	});
 
@@ -160,7 +160,8 @@ const sendPosture = async(x, y, angle, role = "", roomId, userId) =>{
 		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 		credentials: 'same-origin', // include, *same-origin, omit
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		body: JSON.stringify({
@@ -188,7 +189,8 @@ const getPosture = async(roomId) =>{
 		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 		credentials: 'same-origin', // include, *same-origin, omit
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 	}
@@ -206,7 +208,8 @@ const getUser = async () => {
 		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 		credentials: 'same-origin', // include, *same-origin, omit
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 	}
@@ -226,7 +229,8 @@ const getRoom = async() => {
 		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 		credentials: 'same-origin', // include, *same-origin, omit
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 	}

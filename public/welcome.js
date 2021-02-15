@@ -48,7 +48,8 @@ function onResister(){
 		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 		credentials: 'same-origin', // include, *same-origin, omit
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		body: JSON.stringify({
@@ -58,7 +59,7 @@ function onResister(){
 		})
 	}
 
-	const url = domain + "user";
+	const url = "user";
 	console.log(url, option);
 
 	fetch(url, option).then(res => res.json()).then(json =>{
@@ -80,7 +81,8 @@ function onLogin(){
 		cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
 		credentials: 'same-origin', // include, *same-origin, omit
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
 			// 'Content-Type': 'application/x-www-form-urlencoded',
 		},
 		body: JSON.stringify({
@@ -89,7 +91,7 @@ function onLogin(){
 		})
 	}
 
-	const url = domain + "login";
+	const url = "login";
 	console.log(url, option);
 
 	fetch(url, option).then(res => res.json()).then(json =>{
