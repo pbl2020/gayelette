@@ -8,13 +8,14 @@ class Avatar{
 	ff=0
 	dAngle =0
 	size = 30
-	constructor(name,id,x,y,angle){
+	constructor(name,id,x,y,angle,isMe){
 		// setup
 		this.name = name
 		this.id = id
 		this.x = x
 		this.y = y
 		this.angle = angle
+		this.isMe = isMe
 	}
 	draw(){
 		push()
@@ -24,17 +25,29 @@ class Avatar{
 			this.ff--
 
 		}
-		let viewColor = "#B5FF144D";
-		let ellipseColor ="#FFFFFF";
-		let strokeColor  ="#FFFFFF00"
-		let pointy = this.size
-		let pointx = this.size/2
+		let viewColor;
+		let ellipseColor;
+		let strokeColor;
+		let circlesStrokeColor;
+		if(this.isMe == 1){
+			viewColor = "#B5FF144D";
+			ellipseColor ="#7cfc00";
+			circlesStrokeColor  ="#FFFFFF";
+			strokeColor = "#FFFFFF00";
+		}else{
+			viewColor = "#14d4ff4d";
+			ellipseColor ="#FFFFFF";
+			circlesStrokeColor  ="#FFFFFF00";	
+			strokeColor = "#FFFFFF00";
+		}
+
 		// draw
 		translate(this.x,this.y);
 		rotate(radians(this.angle));
 		//triangle(0,0-pointy,0-pointx,0,0+pointx,0)
 
 		fill(viewColor);
+		
 		stroke(strokeColor);
 		// ellipse(0,0,90,90);
 		// fill("#505160");
@@ -52,18 +65,18 @@ class Avatar{
 			const nextVolume = config.volumeAngle[i + 1];
 			arc(0, 0, volume.len, volume.len, radians(-volume.angle),radians(volume.angle), PIE);
 			if(nextVolume){
-				fill("#505160")
+				fill(backgroundColor)
 				arc(0, 0, volume.len, volume.len, radians(-nextVolume.angle),radians(nextVolume.angle), PIE);
 			}
 		}
 
 		fill(ellipseColor);
+		stroke(circlesStrokeColor);
+		strokeWeight(3);
 		circle(0,0,this.size);
 		//ellipse(0,0,this.size,this.size);
 
 		//triangle(0,0,-180,-180,180,180);
-
-		point(this.x,this.y)
 		pop()
 
 	}

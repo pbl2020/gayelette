@@ -1,5 +1,5 @@
 function checkObjectDiff(newObject, oldObject, instance) {
-
+	let isMe = 0;
 	var check = [];
 	for (let j = 0; j < newObject.length; j++) {
 		let flag = false;
@@ -19,7 +19,7 @@ function checkObjectDiff(newObject, oldObject, instance) {
 			}
 		}
 		if (flag == false) {
-			instance.push(new Avatar(newObject[j].name, newObject[j].id, newObject[j].x, newObject[j].y,newObject[j].angle));
+			instance.push(new Avatar(newObject[j].name, newObject[j].id, newObject[j].x, newObject[j].y,newObject[j].angle,isMe));
 		}
 	}
 
@@ -59,7 +59,7 @@ class Stage extends Touchable {
 		}
 		*/
 
-	    this.myAvatar = new Avatar(myAvatar.name,myAvatar.id,myAvatar.x,myAvatar.y,myAvatar.angle);
+	    this.myAvatar = new Avatar(myAvatar.name,myAvatar.id,myAvatar.x,myAvatar.y,myAvatar.angle,myAvatar.isMe);
   	}
 	draw(){
 		super.draw()
