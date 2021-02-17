@@ -15,8 +15,6 @@ const port1 = 3000;
 const port2 = 3001;
 
 const PATH = __dirname;
-// const PATH = "D:/github/gayelette";
-// const PATH = "/Users/shimizutakumi/Documents/GitHub/gayelette"
 
 app.use(cors());
 app.use(function(req, res, next) {
