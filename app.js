@@ -14,9 +14,7 @@ const loginRouter = require("./login.js");
 const port1 = 3000;
 const port2 = 3001;
 
-const PATH = "C:/Users/S.Kite/Documents/Github/gayelette";
-// const PATH = "D:/github/gayelette";
-// const PATH = "/Users/shimizutakumi/Documents/GitHub/gayelette"
+const PATH = __dirname;
 
 app.use(cors());
 app.use(function(req, res, next) {

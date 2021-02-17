@@ -8,12 +8,12 @@ class Screen{
 	hypo = 0;
 	moveAngle = 0;
 	user = {
-		name: "koyama",
-		id: "0312018086",
+		name: "YourName",
+		id: "YourId",
 		x: 100,
 		y: 200,
-		size: 30,
-		angle: 0
+		angle: 0,
+		isMe : 1
 	};
 	otheruser = []
 
