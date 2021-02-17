@@ -36,7 +36,7 @@ class Avatar{
 			circlesStrokeColor  ="#FFFFFF";
 			strokeColor = "#FFFFFF00";
 		}else{
-			viewColor = "#14d4ff4d";
+			viewColor = "#B5FF144D";
 			ellipseColor ="#FFFFFF";
 			circlesStrokeColor  ="#FFFFFF00";	
 			strokeColor = "#FFFFFF00";
