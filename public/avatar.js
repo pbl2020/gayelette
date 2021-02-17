@@ -29,6 +29,7 @@ class Avatar{
 		let ellipseColor;
 		let strokeColor;
 		let circlesStrokeColor;
+		let backgroundColor = "#505160";
 		if(this.isMe == 1){
 			viewColor = "#B5FF144D";
 			ellipseColor ="#7cfc00";
