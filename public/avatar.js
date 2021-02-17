@@ -7,13 +7,13 @@ class Avatar{
 	dy=0
 	ff=0
 	dAngle =0
-	constructor(name,id,x, y,size,angle){
+	size = 30
+	constructor(name,id,x,y,angle){
 		// setup
 		this.name = name
 		this.id = id
 		this.x = x
 		this.y = y
-		this.size = size
 		this.angle = angle
 	}
 	draw(){
@@ -30,8 +30,8 @@ class Avatar{
 		let pointy = this.size
 		let pointx = this.size/2
 		// draw
-		translate(this.x,this.y)
-		rotate(radians(this.angle))
+		translate(this.x,this.y);
+		rotate(radians(this.angle));
 		//triangle(0,0-pointy,0-pointx,0,0+pointx,0)
 
 		fill(viewColor);
@@ -58,12 +58,12 @@ class Avatar{
 		}
 
 		fill(ellipseColor);
-		ellipse(0,0,this.size,this.size)
+		circle(0,0,this.size);
+		//ellipse(0,0,this.size,this.size);
 
 		//triangle(0,0,-180,-180,180,180);
 
 		point(this.x,this.y)
-
 		pop()
 
 	}

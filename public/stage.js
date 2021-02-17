@@ -19,7 +19,7 @@ function checkObjectDiff(newObject, oldObject, instance) {
 			}
 		}
 		if (flag == false) {
-			instance.push(new Avatar(newObject[j].name, newObject[j].id, newObject[j].x, newObject[j].y, newObject[j].size, newObject[j].angle));
+			instance.push(new Avatar(newObject[j].name, newObject[j].id, newObject[j].x, newObject[j].y,newObject[j].angle));
 		}
 	}
 
@@ -59,7 +59,7 @@ class Stage extends Touchable {
 		}
 		*/
 
-	    this.myAvatar = new Avatar(myAvatar.name,myAvatar.id,myAvatar.x,myAvatar.y,	myAvatar.size,myAvatar.angle);
+	    this.myAvatar = new Avatar(myAvatar.name,myAvatar.id,myAvatar.x,myAvatar.y,myAvatar.angle);
   	}
 	draw(){
 		super.draw()

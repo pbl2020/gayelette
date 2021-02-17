@@ -12,7 +12,6 @@ class Screen{
 		id: "0312018086",
 		x: 100,
 		y: 200,
-		size: 30,
 		angle: 0
 	};
 	otheruser = []
