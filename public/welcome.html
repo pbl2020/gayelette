@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <title>Welcome - Gayelette</title>
+	<link rel="stylesheet" href="welcome.css">
+	<script src="welcome.js" defer></script>
+</head>
+<body>
+	<div id="wrapperResister" class="wrapper wrapper-resister">
+		<div class="title">Gayeletteアカウント作成</div>
+		<div class="input-group">
+			<div class="input-group-text">メールアドレス</div>
+			<input type="text" id="input-mail" class="input-group-form" />
+		</div>
+		<div class="input-group">
+			<div class="input-group-text">ユーザ名</div>
+			<input type="text" id="input-username" class="input-group-form" />
+		</div>
+		<div class="input-group">
+			<div class="input-group-text">パスワード</div>
+			<input type="password" id="input-password" class="input-group-form" />
+		</div>
+		<div class="button-container">
+			<button class="button" onclick="onResister()">
+				作成！！
+			</button>
+		</div>
+		<div class="bottom-text-container">
+			<div class="bottom-text">
+				<a onclick="onChangePage('login')">既にアカウントをお持ちですか？</a>
+			</div>
+		</div>
+	</div>
+
+	<div id="wrapperLogin" class="wrapper wrapper-login">
+		<div class="title">Gayelette</div>
+		<div class="input-group">
+			<div class="input-group-text">メールアドレス</div>
+			<input type="text" id="input-mail-login" class="input-group-form" />
+		</div>
+		<div class="input-group">
+			<div class="input-group-text">パスワード</div>
+			<input type="password" id="input-password-login" class="input-group-form" />
+		</div>
+		<div class="button-container">
+			<button class="button" onclick="onLogin()">
+				ログイン
+			</button>
+		</div>
+		<div class="bottom-text-container">
+			<div class="bottom-text">
+				<a onclick="onChangePage('resister')">アカウントを作成しますか？</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

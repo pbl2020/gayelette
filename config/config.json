@@ -1,0 +1,17 @@
+{
+  "development": {
+    "username": "db-development",
+    "dialect": "sqlite",
+    "storage": "gayelette.db"
+  },
+  "test": {
+    "username": "db-test",
+    "dialect": "sqlite",
+    "storage": "db-test.db"
+  },
+  "production": {
+    "username": "db-product",
+    "dialect": "sqlite",
+    "storage": "db.db"
+  }
+}

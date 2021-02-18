@@ -1,0 +1,60 @@
+<html>
+	<head lang="ja">
+		<meta http-equiv="content-type" content="text/html;charset=utf-8">
+		<script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+		<script src="p5.min.js"></script>
+		<script type="text/javascript" src="config.js"></script>
+		<script type="text/javascript" src="index.js"></script>
+		<script type="text/javascript" src="volume.js"></script>
+		<script type="text/javascript" src="touchable.js"></script>
+		<script type="text/javascript" src="context-menu.js"></script>
+		<script type="text/javascript" src="menu.js"></script>
+		<script type="text/javascript" src="avatar.js"></script>
+		<script type="text/javascript" src="stage.js"></script>
+		<script type="text/javascript" src="sketch.js"></script>
+		<link rel="stylesheet" href="./style.css">
+		<style type="text/css">
+			html{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+		<title>Gayelette</title>
+	</head>
+	<body>
+		<main>
+		</main>
+		<div style="float:right;">
+		<div class="videosContainer">
+			<video id="myStream" autoplay></video>
+		</div>
+	</div>
+		<div class="myControllerContainer">
+			<p style="top:300;text-align:left;">Your id:
+				<span id="my-id">...</span>
+			</p>
+		<form id="make-call">
+			<input style="text-align:center"type="text" placeholder="Join room" id="join-room">
+			<button type="submit">JOIN</button>
+		</form>
+		<div class="select">
+				<label for="audioSource">Audio input source: </label><select id="audioSource"></select>
+		</div>
+		<div class="select">
+				<label for="videoSource">Video source: </label><select id="videoSource"></select>
+		</div>
+
+		<div id="end-call">
+			<p>Currently in room
+				<span id="room-id">..</span>
+			</p>
+			<button>Leave</button>
+		</div>
+	</div>
+	</body>
+</html>
